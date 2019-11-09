@@ -133,6 +133,9 @@ Container where you can add lines of the form $kx + m$, and query maximum values
 All operations are $\mathcal{O}(\log(n))$. For doubles, use \texttt{inf = 1/.0} and \texttt{div(a,b) = a/b}
 \lstinputlisting[language=C++]{code/line_container.cpp}
 
+\subsection*{Treap}
+\lstinputlisting[language=C++]{code/treap.cpp}
+
 \pagebreak
 
 \section*{Graph Algorithms}
@@ -229,7 +232,7 @@ Time complexity: Approximately $\mathcal{O}(E^2)$.
 Cost matrix must be square! \texttt{L} and \texttt{R} are outputs describing the matching. Negate costs for max cost. Time complexity: $\mathcal{O}(n^3)$
 \lstinputlisting[language=C++]{code/min_cost_matching.cpp}
 
-\subsection*{Numerical}
+\section*{Math}
 
 \subsection*{Solve Linear System of Equations}
 Solves $A x = b$. If there are multiple solutions, an arbitrary one is returned.
@@ -245,6 +248,17 @@ Usage (solves $x^2-3x+2 = 0$): \texttt{poly\_roots(\{\{ 2, -3, 1 \}\} ,-1e9,1e9)
 
 \lstinputlisting[language=C++]{code/poly_roots.cpp}
 
+
+\subsection*{Fast Fourier Transform}
+\texttt{fft(a)} computes $\hat f(k) = \sum_x a[x] \exp(2\pi i \cdot k x / N)$ for all $k$. Useful for convolution:
+\texttt{conv(a, b) = c}, where $c[x] = \sum a[i]b[x-i]$.
+Rounding is safe if $(\sum a_i^2 + \sum b_i^2)\log_2{N} < 9\cdot10^{14}$
+(in practice $10^{16}$; higher for random inputs).
+
+Time complexity: $\mathcal{O}(N \log N)$ with $N = |A|+|B|$ (about $1s$ for $N=4 \cdot 10^6$)
+\lstinputlisting[language=C++]{code/fft.cpp}
+
+\pagebreak
 
 \section*{Misc}
 
