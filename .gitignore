@@ -1,0 +1,8 @@
+.vscode
+a.out
+/notebook.aux
+/notebook.fls
+/notebook.log
+/notebook.fdb_latexmk
+/notebook.pdf
+/notebook.synctex.gz

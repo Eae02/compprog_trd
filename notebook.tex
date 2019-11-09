@@ -1,0 +1,257 @@
+\documentclass{article}
+
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{amsmath}
+\usepackage[default]{sourcecodepro}
+\usepackage[default]{sourcesanspro}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=0.8in]{geometry}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+
+\renewcommand\headrulewidth{0pt}
+
+\fancypagestyle{plain}{
+\fancyhead[L]{\color{black!75} Lund University}
+\fancyhead[C]{\color{black!75} Balloon Overflow}
+\fancyhead[R]{\color{black!75} \thepage}
+\fancyfoot[C]{}}
+\pagestyle{plain}
+
+\setlength\parindent{0pt}
+\setlength{\parskip}{0.25em}
+\titleformat{\subsection}{\bfseries}{\thesection}{1.2em}{}
+\titleformat{\section}{\normalfont\Large\bfseries}{\thesection}{1em}{}[{\titlerule[0.8pt]}]
+\titlespacing{\section}{0pt}{0.5em}{0.5em}
+\titlespacing{\subsection}{0pt}{0pt}{0.5em}
+
+\lstset{ 
+  backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}; should come as last argument
+  basicstyle=\ttfamily\footnotesize,
+  breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+  breaklines=true,                 % sets automatic line breaking
+  deletekeywords={...},            % if you want to delete keywords from the given language
+  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+  numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+  numbersep=5pt,                   % how far the line-numbers are from the code
+  tabsize=4,
+  rulecolor=\color{black},
+  numberstyle=\tiny\color{black!50},
+  stringstyle=\color[rgb]{0.58,0,0.82},
+  commentstyle=\itshape\color{green!30!black},
+  keywordstyle=\bfseries\color[HTML]{016477},
+  aboveskip=0.5 \baselineskip,
+  belowskip=1.0 \baselineskip
+}
+
+\begin{document}
+
+\begin{titlepage}
+  \centering
+  \topskip0pt
+  \vspace*{\fill}
+  \includegraphics[width=100pt]{balloon.jpg}\\
+  \vspace{0.5cm}
+  {\scshape\Huge Balloon Overflow Notebook \par}
+  \vspace{1cm}
+  {\LARGE\color{black!75} Lund University \par}
+  \vspace*{\fill}
+\end{titlepage}
+
+\section*{Geometry}
+
+\lstinputlisting[language=python]{code/geometry/geometry.py}
+
+\subsection*{Distance between point and line}
+Returns the signed distance from the point \texttt{p} to the line passing through the points \texttt{a} and \texttt{b}.
+\lstinputlisting[language=python]{code/geometry/dist_pl.py}
+
+\subsection*{Distance between point and line segment}
+Returns the distance from the point \texttt{p} to the line segment starting at \texttt{s} and ending at \texttt{e}.
+\lstinputlisting[language=python]{code/geometry/dist_ps.py}
+
+\subsection*{Check if point is on line segment}
+\lstinputlisting[language=python]{code/geometry/on_segment.py}
+
+\subsection*{Project point to line (or reflect)}
+Projects the point \texttt{p} onto the line passing through \texttt{a} and \texttt{b}.\\
+Set \texttt{refl=True} to get reflection of point p across the line instead.
+\lstinputlisting[language=python]{code/geometry/proj_pl.py}
+
+\subsection*{Intersection between two lines}
+If a unique intersection point of the lines going through \texttt{s1,e1} and \texttt{s2,e2} exists \texttt{(1,point)} is returned.\\
+If no intersection point exists \texttt{(0,(0,0))} is returned and if infinitely many exist \texttt{(-1,(0,0))} is returned.
+\lstinputlisting[language=python]{code/geometry/intersect_ll.py}
+
+\subsection*{Intersection between two line segments}
+If a unique intersection is found, returns a list with only this point.
+If the segments intersect in many points, returns a list of 2 elements containing the
+start and end of the common line segment. If no intersection, returns an empty list
+\lstinputlisting[language=python]{code/geometry/intersect_ss.py}
+
+\subsection*{Intersection between two circles}
+Computes the pair of points at which two circles intersect. Returns \texttt{None} in case of no intersection.
+\lstinputlisting[language=python]{code/geometry/intersect_cc.py}
+
+\subsection*{Polygon area}
+Returns twice the signed area of a polygon. Clockwise enumeration gives negative area.
+\lstinputlisting[language=python]{code/geometry/polygon_area.py}
+
+\subsection*{Point inside polygon}
+Returns true if the point \texttt{pt} lies within the polygon \texttt{poly}.
+If strict is true, returns false for points on the boundary.
+\lstinputlisting[language=python]{code/geometry/point_in_polygon.py}
+
+\pagebreak
+
+\subsection*{Convex hull (python)}
+Returns a list of points on the convex hull in counter-clockwise order.
+Points on the edge of the hull between two other points are not considered part of the hull.
+Time complexity: $\mathcal{O}(n \log n)$
+\lstinputlisting[language=python]{code/geometry/convex_hull.py}
+
+\subsection*{Convex hull (C++)}
+\lstinputlisting[language=C++]{code/geometry/convex_hull.cpp}
+
+\section*{Data Structures}
+
+\subsection*{Segment Tree}
+
+\lstinputlisting[language=C++]{code/segtree.cpp}
+
+\subsection*{Fenwick Tree}
+\lstinputlisting[language=C++, aboveskip=0pt]{code/fenwick_tree.cpp}
+
+\subsection*{Sparse Table}
+\lstinputlisting[language=C++, aboveskip=0pt]{code/sparse_table.cpp}
+
+\subsection*{Line Container}
+Container where you can add lines of the form $kx + m$, and query maximum values at points $x$.
+All operations are $\mathcal{O}(\log(n))$. For doubles, use \texttt{inf = 1/.0} and \texttt{div(a,b) = a/b}
+\lstinputlisting[language=C++]{code/line_container.cpp}
+
+\pagebreak
+
+\section*{Graph Algorithms}
+
+\subsection*{Floyd Warshall}
+
+Calculates all-pairs shortest path in a directed graph in $\mathcal{O}(N^3)$.
+
+Input is an distance matrix $m$, where \texttt{m[i][j] = inf} if $i$ and $j$ are not adjacent.
+As output, \texttt{m[i][j]} is set to the shortest distance between $i$ and $j$,
+\texttt{inf} if no path, or \texttt{-inf} if the path goes through a negative-weight cycle.
+
+\lstinputlisting[language=C++]{code/floyd_warshall.cpp}
+
+
+\subsection*{Strongly Connected Components}
+
+Finds strongly connected components in a directed graph. If vertices $u, v$ belong to the same component, we can reach $u$ from $v$ and vice versa.
+Time complexity: $\mathcal{O}(E + V)$
+
+Usage: \texttt{scc(graph, [\&](vi\& v) \{ \ldots \ \})} visits all components
+in reverse topological order. \texttt{comp[i]} holds the component
+index of a node (a component only has edges to components with
+lower index). ncomps will contain the number of components.
+
+\lstinputlisting[language=C++]{code/scc.cpp}
+
+\pagebreak
+
+\subsection*{2-SAT}
+
+Calculates a valid assignment to boolean variables $a, b, c,\ldots$ to a 2-SAT problem.
+Negated variables are represented by bit-inversions (~x).
+
+Time complexity: $\mathcal{O}(N+E)$, where $N$ is the number of boolean variables, and $E$ is the number of clauses.
+
+\lstinputlisting[language=C++]{code/2sat.cpp}
+\begin{lstlisting}[language=C++, aboveskip=0pt]
+//Usage:
+TwoSat ts(number of boolean variables);
+ts.either(0, ~3); // Var 0 is true or var 3 is false
+ts.set_value(2); // Var 2 is true
+ts.at_most_one({0,~1,2}); // <= 1 of vars 0, ~1 and 2 are true
+ts.solve(); // Returns true iff it is solvable. ts.values holds the assigned values to the variables
+\end{lstlisting}
+
+
+\subsection*{Biconnected Components}
+
+Finds all biconnected components in an undirected graph, and
+runs a callback for the edges in each. In a biconnected component there
+are at least two distinct paths between any two nodes. Note that a node can
+be in several components. An edge which is not in a component is a bridge,
+i.e., not part of any cycle. Time complexity: $\mathcal{O}(E + V)$
+
+\lstinputlisting[language=C++]{code/biconnected_components.cpp}
+
+\begin{lstlisting}[language=C++]
+//Usage:
+int eid = 0; ed.resize(N);
+for each edge (a,b) {
+    ed[a].emplace_back(b, eid);
+    ed[b].emplace_back(a, eid++); }
+bicomps([&](const vi& edgelist) {...});
+\end{lstlisting}
+
+\pagebreak
+
+\section*{Matching \& Flow}
+
+
+\subsection*{Maximum Flow (Dinic's Algorithm)}
+
+Constructor takes number of nodes, call \texttt{addEdge} to add edges and \texttt{calc} to find maximum flow.
+To obtain the actual flow, look at positive values of \texttt{Edge::cap} only.
+
+Time complexity: $\mathcal{O}(VE\log U)$ where $U = \max |\text{cap}|$.
+$\mathcal{O}(\min(E^{1/2}, V^{2/3})E)$ if $U = 1$.\\
+$\mathcal{O}(\sqrt{V}E)$ for bipartite matching.
+\lstinputlisting[language=C++]{code/max_flow.cpp}
+
+
+\subsection*{Minimum Cost Maximum Flow}
+
+Calculates min-cost max-flow. \texttt{cap[i][j] != cap[j][i]} is allowed; double edges are not. To obtain the actual flow, look at positive values only.
+If costs can be negative, call \texttt{setpi} before \texttt{maxflow}, but note that negative cost cycles are not supported.
+Time complexity: Approximately $\mathcal{O}(E^2)$.
+
+\lstinputlisting[language=C++]{code/min_cost_max_flow.cpp}
+
+\pagebreak
+
+\subsection*{Minimum Cost Bipartite Matching}
+Cost matrix must be square! \texttt{L} and \texttt{R} are outputs describing the matching. Negate costs for max cost. Time complexity: $\mathcal{O}(n^3)$
+\lstinputlisting[language=C++]{code/min_cost_matching.cpp}
+
+\subsection*{Numerical}
+
+\subsection*{Solve Linear System of Equations}
+Solves $A x = b$. If there are multiple solutions, an arbitrary one is returned.
+Returns rank, or $-1$ if no solutions. Time complexity: $\mathcal{O}(n^2 m)$
+\lstinputlisting[language=C++]{code/solve_linear.cpp}
+
+
+\subsection*{Polynomial Roots}
+
+Finds the real roots of a polynomial. Time complexity: $\mathcal{O}(n^2 \log(1/\epsilon))$.
+
+Usage (solves $x^2-3x+2 = 0$): \texttt{poly\_roots(\{\{ 2, -3, 1 \}\} ,-1e9,1e9)}
+
+\lstinputlisting[language=C++]{code/poly_roots.cpp}
+
+
+\section*{Misc}
+
+\subsection*{Template}
+\lstinputlisting[language=C++]{code/common.hpp}
+
+\subsection*{Polynomial Hash}
+\lstinputlisting[language=C++]{code/poly_hash.cpp}
+
+\end{document}
