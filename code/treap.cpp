@@ -1,7 +1,9 @@
 struct Treap {
 	Treap *l = 0, *r = 0;
-	int val, y, c = 1;
-	Treap(int val) : val(val), y(rand()) { }
+	int y, c = 1;
+	
+	int val;
+	Treap(int val) : y(rand()), val(val) { }
 };
 
 // returns the number of nodes in treap n
@@ -10,6 +12,14 @@ int trCount(Treap* n) {
 }
 void trRecount(Treap* n) {
 	n->c = trCount(n->l) + trCount(n->r) + 1;
+}
+
+// returns the treap node at the specified index
+Treap* trAt(Treap* n, int idx) {
+	if (!n || idx == trCount(n->l)) return n;
+	if (idx > trCount(n->l))
+		return trAt(n->r, idx - trCount(n->l) - 1);
+	return trAt(n->l, idx);
 }
 
 // invokes f for every item in the treap n, ordered by index
