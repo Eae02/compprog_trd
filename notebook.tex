@@ -66,24 +66,24 @@
 \lstinputlisting[language=python]{code/geometry/geometry.py}
 
 \subsection*{Distance between point and line}
-Returns the signed distance from the point \texttt{p} to the line passing through the points \texttt{a} and \texttt{b}.
+Returns the signed distance from the point p to the line passing through the points a and b.
 \lstinputlisting[language=python]{code/geometry/dist_pl.py}
 
 \subsection*{Distance between point and line segment}
-Returns the distance from the point \texttt{p} to the line segment starting at \texttt{s} and ending at \texttt{e}.
+Returns the distance from the point p to the line segment starting at s and ending at e.
 \lstinputlisting[language=python]{code/geometry/dist_ps.py}
 
 \subsection*{Check if point is on line segment}
 \lstinputlisting[language=python]{code/geometry/on_segment.py}
 
 \subsection*{Project point to line (or reflect)}
-Projects the point \texttt{p} onto the line passing through \texttt{a} and \texttt{b}.\\
-Set \texttt{refl=True} to get reflection of point p across the line instead.
+Projects the point p onto the line passing through a and b.\\
+Set \lstinline{refl=True} to get reflection of point p across the line instead.
 \lstinputlisting[language=python]{code/geometry/proj_pl.py}
 
 \subsection*{Intersection between two lines}
-If a unique intersection point of the lines going through \texttt{s1,e1} and \texttt{s2,e2} exists \texttt{(1,point)} is returned.\\
-If no intersection point exists \texttt{(0,(0,0))} is returned and if infinitely many exist \texttt{(-1,(0,0))} is returned.
+If a unique intersection point of the lines going through \lstinline{s1,e1} and \lstinline{s2,e2} exists \lstinline{(1,point)} is returned.\\
+If no intersection point exists \lstinline{(0,(0,0))} is returned and if infinitely many exist \lstinline{(-1,(0,0))} is returned.
 \lstinputlisting[language=python]{code/geometry/intersect_ll.py}
 
 \subsection*{Intersection between two line segments}
@@ -93,7 +93,7 @@ start and end of the common line segment. If no intersection, returns an empty l
 \lstinputlisting[language=python]{code/geometry/intersect_ss.py}
 
 \subsection*{Intersection between two circles}
-Computes the pair of points at which two circles intersect. Returns \texttt{None} in case of no intersection.
+Computes the pair of points at which two circles intersect. Returns \lstinline{None} in case of no intersection.
 \lstinputlisting[language=python]{code/geometry/intersect_cc.py}
 
 \subsection*{Polygon area}
@@ -101,7 +101,7 @@ Returns twice the signed area of a polygon. Clockwise enumeration gives negative
 \lstinputlisting[language=python]{code/geometry/polygon_area.py}
 
 \subsection*{Point inside polygon}
-Returns true if the point \texttt{pt} lies within the polygon \texttt{poly}.
+Returns true if the point \lstinline{pt} lies within the polygon \lstinline{poly}.
 If strict is true, returns false for points on the boundary.
 \lstinputlisting[language=python]{code/geometry/point_in_polygon.py}
 
@@ -130,7 +130,7 @@ Time complexity: $\mathcal{O}(n \log n)$
 
 \subsection*{Line Container}
 Container where you can add lines of the form $kx + m$, and query maximum values at points $x$.
-All operations are $\mathcal{O}(\log(n))$. For doubles, use \texttt{inf = 1/.0} and \texttt{div(a,b) = a/b}
+All operations are $\mathcal{O}(\log(n))$. For doubles, use \lstinline{inf = 1/.0} and \lstinline{div(a,b) = a/b}
 \lstinputlisting[language=C++]{code/line_container.cpp}
 
 \subsection*{Treap}
@@ -144,9 +144,9 @@ All operations are $\mathcal{O}(\log(n))$. For doubles, use \texttt{inf = 1/.0} 
 
 Calculates all-pairs shortest path in a directed graph in $\mathcal{O}(N^3)$.
 
-Input is an distance matrix $m$, where \texttt{m[i][j] = inf} if $i$ and $j$ are not adjacent.
-As output, \texttt{m[i][j]} is set to the shortest distance between $i$ and $j$,
-\texttt{inf} if no path, or \texttt{-inf} if the path goes through a negative-weight cycle.
+Input is an distance matrix $m$, where \lstinline{m[i][j]=inf} if $i$ and $j$ are not adjacent.
+As output, \lstinline{m[i][j]} is set to the shortest distance between $i$ and $j$,
+\lstinline{inf} if no path, or \lstinline{-inf} if the path goes through a negative-weight cycle.
 
 \lstinputlisting[language=C++]{code/floyd_warshall.cpp}
 
@@ -156,7 +156,7 @@ As output, \texttt{m[i][j]} is set to the shortest distance between $i$ and $j$,
 Finds strongly connected components in a directed graph. If vertices $u, v$ belong to the same component, we can reach $u$ from $v$ and vice versa.
 Time complexity: $\mathcal{O}(E + V)$
 
-Usage: \texttt{scc(graph, [\&](vi\& v) \{ \ldots \ \})} visits all components
+Usage: \lstinline|scc(graph, [&](vector<int>& v) { ... })}| visits all components
 in reverse topological order. \texttt{comp[i]} holds the component
 index of a node (a component only has edges to components with
 lower index). ncomps will contain the number of components.
@@ -209,8 +209,8 @@ bicomps([&](const vi& edgelist) {...});
 
 \subsection*{Maximum Flow (Dinic's Algorithm)}
 
-Constructor takes number of nodes, call \texttt{addEdge} to add edges and \texttt{calc} to find maximum flow.
-To obtain the actual flow, look at positive values of \texttt{Edge::cap} only.
+Constructor takes number of nodes, call \lstinline{addEdge} to add edges and \lstinline{calc} to find maximum flow.
+To obtain the actual flow, look at positive values of \lstinline{Edge::cap} only.
 
 Time complexity: $\mathcal{O}(VE\log U)$ where $U = \max |\text{cap}|$.
 $\mathcal{O}(\min(E^{1/2}, V^{2/3})E)$ if $U = 1$.\\
@@ -220,8 +220,8 @@ $\mathcal{O}(\sqrt{V}E)$ for bipartite matching.
 
 \subsection*{Minimum Cost Maximum Flow}
 
-Calculates min-cost max-flow. \texttt{cap[i][j] != cap[j][i]} is allowed; double edges are not. To obtain the actual flow, look at positive values only.
-If costs can be negative, call \texttt{setpi} before \texttt{maxflow}, but note that negative cost cycles are not supported.
+Calculates min-cost max-flow. \lstinline{cap[i][j]!=cap[j][i]} is allowed; double edges are not. To obtain the actual flow, look at positive values only.
+If costs can be negative, call \lstinline{setpi} before \lstinline{maxflow}, but note that negative cost cycles are not supported.
 Time complexity: Approximately $\mathcal{O}(E^2)$.
 
 \lstinputlisting[language=C++]{code/min_cost_max_flow.cpp}
@@ -229,7 +229,7 @@ Time complexity: Approximately $\mathcal{O}(E^2)$.
 \pagebreak
 
 \subsection*{Minimum Cost Bipartite Matching}
-Cost matrix must be square! \texttt{L} and \texttt{R} are outputs describing the matching. Negate costs for max cost. Time complexity: $\mathcal{O}(n^3)$
+Cost matrix must be square! L and R are outputs describing the matching. Negate costs for max cost. Time complexity: $\mathcal{O}(n^3)$
 \lstinputlisting[language=C++]{code/min_cost_matching.cpp}
 
 \section*{Math}
@@ -244,14 +244,15 @@ Returns rank, or $-1$ if no solutions. Time complexity: $\mathcal{O}(n^2 m)$
 
 Finds the real roots of a polynomial. Time complexity: $\mathcal{O}(n^2 \log(1/\epsilon))$.
 
-Usage (solves $x^2-3x+2 = 0$): \texttt{poly\_roots(\{\{ 2, -3, 1 \}\} ,-1e9,1e9)}
+Usage (solves $x^2-3x+2 = 0$): \lstinline[language=C++]|poly_roots({{ 2, -3, 1 }},-1e9,1e9)|
 
 \lstinputlisting[language=C++]{code/poly_roots.cpp}
 
 
 \subsection*{Fast Fourier Transform}
-\texttt{fft(a)} computes $\hat f(k) = \sum_x a[x] \exp(2\pi i \cdot k x / N)$ for all $k$. Useful for convolution:
-\texttt{conv(a, b) = c}, where $c[x] = \sum a[i]b[x-i]$.
+\lstinline{fft(a)} computes $\hat f(k) = \sum_x a[x] \exp(2\pi i \cdot k x / N)$ for all $k$.\\
+Useful for convolution: \lstinline{conv(a, b)=c}, where $c[x] = \sum a[i]b[x-i]$.
+
 Rounding is safe if $(\sum a_i^2 + \sum b_i^2)\log_2{N} < 9\cdot10^{14}$
 (in practice $10^{16}$; higher for random inputs).
 
@@ -267,5 +268,12 @@ Time complexity: $\mathcal{O}(N \log N)$ with $N = |A|+|B|$ (about $1s$ for $N=4
 
 \subsection*{Polynomial Hash}
 \lstinputlisting[language=C++]{code/poly_hash.cpp}
+
+\subsection*{Compilation Script}
+\lstinputlisting[language=bash]{scripts/compile.sh}
+
+\subsection*{Run Script}
+Usage: \lstinline{./run.sh path/to/sample/folder ./solution.bin}
+\lstinputlisting[language=bash]{scripts/run.sh}
 
 \end{document}
