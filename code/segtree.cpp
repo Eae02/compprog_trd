@@ -4,7 +4,7 @@ struct SegTree {
 	static constexpr T UNIT = 0; // neutral value for f
 	
 	vector<T> s; ll n;
-	SegTree(ll n) : s(2*n, UNIT), n(n) {}
+	SegTree(ll len) : s(2 * len, UNIT), n(len) {}
 	void set(ll pos, T val) {
 		for (s[pos += n] = val; pos /= 2;)
 			s[pos] = f(s[pos * 2], s[pos * 2 + 1]);

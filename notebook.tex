@@ -231,11 +231,11 @@ $\mathcal{O}(\sqrt{V}E)$ for bipartite matching.
 
 \subsection*{Minimum Cost Maximum Flow}
 
-Calculates min-cost max-flow. \lstinline{cap[i][j]!=cap[j][i]} is allowed; double edges are not. To obtain the actual flow, look at positive values only.
-If costs can be negative, call \lstinline{setpi} before \lstinline{maxflow}, but note that negative cost cycles are not supported.
-Time complexity: Approximately $\mathcal{O}(E^2)$.
+Calculates min-cost max-flow. \lstinline{cap[i][j]!=cap[j][i]} is allowed; double edges are not. To obtain the actual flow, look at positive values only. Time complexity: Approximately $\mathcal{O}(E^2)$.
 
-\lstinputlisting[language=C++]{code/min_cost_max_flow.cpp}
+If costs can be negative, call \lstinline{setpi} before \lstinline{maxflow}, but note that negative cost cycles are not supported.
+
+\lstinputlisting[language=C++,breakatwhitespace=true]{code/min_cost_max_flow.cpp}
 
 \pagebreak
 

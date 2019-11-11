@@ -2,7 +2,7 @@
 const ll INF = LLONG_MAX / 4;
 struct MCMF {
 	int N;
-	vector<vector<int> > ed, red;
+	vector<vector<int>> ed, red;
 	vector<vector<ll>> cap, flow, cost;
 	vector<int> seen;
 	vector<ll> dist, pi;
@@ -36,9 +36,9 @@ struct MCMF {
 		while (!q.empty()) {
 			s = q.top().second; q.pop();
 			seen[s] = 1; di = dist[s] + pi[s];
-			for(auto& i : ed[s]) if (!seen[i])
+			for (auto& i : ed[s]) if (!seen[i])
 				relax(i, cap[s][i] - flow[s][i], cost[s][i], 1);
-			for(auto& i : red[s]) if (!seen[i])
+			for (auto& i : red[s]) if (!seen[i])
 				relax(i, flow[i][s], -cost[i][s], 0);
 		}
 		for(int i = 0; i < N; i++)
@@ -51,14 +51,15 @@ struct MCMF {
 			for (int p,r,x = t; tie(p,r) = par[x], x != s; x = p)
 				fl = min(fl, r ? cap[p][x] - flow[p][x] : flow[x][p]);
 			totflow += fl;
-			for (int p,r,x = t; tie(p,r) = par[x], x != s; x = p)
+			for (int p,r,x = t; tie(p,r) = par[x], x != s; x = p) {
 				if (r) flow[p][x] += fl;
 				else flow[x][p] -= fl;
+			}
 		}
 		for(int i = 0; i < N; i++)
 			for(int j = 0; j < N; j++)
 				totcost += cost[i][j] * flow[i][j];
-		return {totflow, totcost};
+		return { totflow, totcost };
 	}
 	// Optional, if some costs can be negative, call this before maxflow:
 	void setpi(int s) {
