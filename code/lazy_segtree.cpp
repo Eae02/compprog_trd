@@ -1,7 +1,7 @@
 struct LazyST {
 	using T = ll;
 	
-	T fUpdate(T a, T b) { return a + b; }
+	T fUpdate(T a, T b) { return a + b; } // use return b; for interval-set
 	T fQuery(T a, T b) { return min(a, b); }
 	static const T UPDATE_UNIT = 0;        // neutral value or fUpdate
 	static const T QUERY_UNIT = LLONG_MAX; // neutral value for fQuery
