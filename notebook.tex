@@ -118,11 +118,19 @@ Time complexity: $\mathcal{O}(n \log n)$
 \section*{Data Structures}
 
 \subsection*{Segment Tree}
-
 \lstinputlisting[language=C++]{code/segtree.cpp}
 
 \subsection*{Fenwick Tree}
 \lstinputlisting[language=C++, aboveskip=0pt]{code/fenwick_tree.cpp}
+
+\subsection*{Lazy Segment Tree}
+Segment tree with support for range updates. Use T = pair of value and index to get index from queries.\\
+All ranges are \lstinline{(lo, hi]} (hi is not included).
+\lstinline{fQuery} defines the function to be used for queries (currently min) and 
+\lstinline{fUpdate} defines the function to be used for updates (currently addition).
+\lstinputlisting[language=C++]{code/lazy_segtree.cpp}
+
+\pagebreak
 
 \subsection*{Sparse Table}
 \lstinputlisting[language=C++, aboveskip=0pt]{code/sparse_table.cpp}
@@ -131,6 +139,8 @@ Time complexity: $\mathcal{O}(n \log n)$
 Container where you can add lines of the form $kx + m$, and query maximum values at points $x$.
 All operations are $\mathcal{O}(\log(n))$. For doubles, use \lstinline{inf = 1/.0} and \lstinline{div(a,b) = a/b}
 \lstinputlisting[language=C++]{code/line_container.cpp}
+
+\pagebreak
 
 \subsection*{Treap}
 \lstinputlisting[language=C++]{code/treap.cpp}
