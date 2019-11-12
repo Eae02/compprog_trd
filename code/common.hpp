@@ -1,4 +1,3 @@
-#pragma GCC optimize("Ofast")
 #include <bits/stdc++.h>
 #define all(x) begin(x),end(x)
 using namespace std;

@@ -7,10 +7,8 @@ struct MCMF {
 	vector<int> seen;
 	vector<ll> dist, pi;
 	vector<pair<int, int> > par;
-	MCMF(int N) :
-		N(N), ed(N), red(N), cap(N, vector<ll>(N)), flow(cap), cost(cap),
-		seen(N), dist(N), pi(N), par(N) {}
-	
+	MCMF(int N) : N(N), ed(N), red(N), cap(N, vector<ll>(N)),
+		flow(cap), cost(cap), seen(N), dist(N), pi(N), par(N) { }
 	void addEdge(int from, int to, ll cap, ll cost) {
 		this->cap[from][to] = cap;
 		this->cost[from][to] = cost;
@@ -29,13 +27,16 @@ struct MCMF {
 			if (cap && val < dist[i]) {
 				dist[i] = val;
 				par[i] = {s, dir};
-				if (its[i] == q.end()) its[i] = q.push({-dist[i], i});
-				else q.modify(its[i], {-dist[i], i});
+				if (its[i] == q.end())
+					its[i] = q.push({-dist[i], i});
+				else
+					q.modify(its[i], {-dist[i], i});
 			}
 		};
 		while (!q.empty()) {
 			s = q.top().second; q.pop();
-			seen[s] = 1; di = dist[s] + pi[s];
+			seen[s] = 1;
+			di = dist[s] + pi[s];
 			for (auto& i : ed[s]) if (!seen[i])
 				relax(i, cap[s][i] - flow[s][i], cost[s][i], 1);
 			for (auto& i : red[s]) if (!seen[i])
@@ -61,7 +62,8 @@ struct MCMF {
 				totcost += cost[i][j] * flow[i][j];
 		return { totflow, totcost };
 	}
-	// Optional, if some costs can be negative, call this before maxflow:
+	
+	// optional, if some costs can be negative, call this before maxflow
 	void setpi(int s) {
 		fill(all(pi), INF); pi[s] = 0;
 		int it = N, ch = 1; ll v;

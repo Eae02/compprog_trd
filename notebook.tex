@@ -26,7 +26,7 @@
 \titleformat{\subsection}{\bfseries}{\thesection}{1.2em}{}
 \titleformat{\section}{\normalfont\Large\bfseries}{\thesection}{1em}{}[{\titlerule[0.8pt]}]
 \titlespacing{\section}{0pt}{0.5em}{0.5em}
-\titlespacing{\subsection}{0pt}{0pt}{0.5em}
+\titlespacing{\subsection}{0pt}{0pt}{0.2em}
 
 \lstset{ 
   backgroundcolor=\color{white},
@@ -60,17 +60,35 @@
   \vspace*{\fill}
 \end{titlepage}
 
+\section*{Misc}
+
+\subsection*{Template}
+\lstinputlisting[language=C++]{code/common.hpp}
+
+\subsection*{Optimization Pragma}
+\begin{lstlisting}[language=C++]
+#pragma GCC optimize("Ofast")
+\end{lstlisting}
+
+\subsection*{Compilation Script}
+\lstinputlisting[language=bash]{scripts/compile.sh}
+
+\subsection*{Run Script}
+Usage: \lstinline{./run.sh path/to/sample/folder ./solution.bin}
+\lstinputlisting[language=bash]{scripts/run.sh}
+
 \section*{Geometry}
 
+\subsection*{Geometry Template}
 \lstinputlisting[language=python]{code/geometry/geometry.py}
-
-\subsection*{Distance between point and line}
-Returns the signed distance from the point p to the line passing through the points a and b.
-\lstinputlisting[language=python]{code/geometry/dist_pl.py}
 
 \subsection*{Distance between point and line segment}
 Returns the distance from the point p to the line segment starting at s and ending at e.
 \lstinputlisting[language=python]{code/geometry/dist_ps.py}
+
+\subsection*{Distance between point and line}
+Returns the signed distance from the point p to the line passing through the points a and b.
+\lstinputlisting[language=python]{code/geometry/dist_pl.py}
 
 \subsection*{Check if point is on line segment}
 \lstinputlisting[language=python]{code/geometry/on_segment.py}
@@ -90,14 +108,6 @@ If a unique intersection is found, returns a list with only this point.
 If the segments intersect in many points, returns a list of 2 elements containing the
 start and end of the common line segment. If no intersection, returns an empty list
 \lstinputlisting[language=python]{code/geometry/intersect_ss.py}
-\subsection*{Intersection between two circles}
-
-Computes the pair of points at which two circles intersect. Returns \lstinline{None} in case of no intersection.
-\lstinputlisting[language=python]{code/geometry/intersect_cc.py}
-
-\subsection*{Polygon area}
-Returns twice the signed area of a polygon. Clockwise enumeration gives negative area.
-\lstinputlisting[language=python]{code/geometry/polygon_area.py}
 
 \subsection*{Point inside polygon}
 Returns true if the point \lstinline{pt} lies within the polygon \lstinline{poly}.
@@ -105,6 +115,14 @@ If strict is true, returns false for points on the boundary.
 \lstinputlisting[language=python]{code/geometry/point_in_polygon.py}
 
 \pagebreak
+
+\subsection*{Polygon area}
+Returns twice the signed area of a polygon. Clockwise enumeration gives negative area.
+\lstinputlisting[language=python]{code/geometry/polygon_area.py}
+
+\subsection*{Intersection between two circles}
+Computes the pair of points at which two circles intersect. Returns \lstinline{None} in case of no intersection.
+\lstinputlisting[language=python]{code/geometry/intersect_cc.py}
 
 \subsection*{Convex hull (python)}
 Returns a list of points on the convex hull in counter-clockwise order.
@@ -115,6 +133,8 @@ Time complexity: $\mathcal{O}(n \log n)$
 \subsection*{Convex hull (C++)}
 \lstinputlisting[language=C++]{code/geometry/convex_hull.cpp}
 
+\pagebreak
+
 \section*{Data Structures}
 
 \subsection*{Segment Tree}
@@ -123,6 +143,11 @@ Time complexity: $\mathcal{O}(n \log n)$
 \subsection*{Fenwick Tree}
 \lstinputlisting[language=C++, aboveskip=0pt]{code/fenwick_tree.cpp}
 
+\subsection*{Sparse Table}
+\lstinputlisting[language=C++, aboveskip=0pt]{code/sparse_table.cpp}
+
+\pagebreak
+
 \subsection*{Lazy Segment Tree}
 Segment tree with support for range updates. Use T = pair of value and index to get index from queries.\\
 All ranges are \lstinline{(lo, hi]} (hi is not included).
@@ -130,22 +155,13 @@ All ranges are \lstinline{(lo, hi]} (hi is not included).
 \lstinline{fUpdate} defines the function to be used for updates (currently addition).
 \lstinputlisting[language=C++]{code/lazy_segtree.cpp}
 
-\pagebreak
-
-\subsection*{Sparse Table}
-\lstinputlisting[language=C++, aboveskip=0pt]{code/sparse_table.cpp}
-
 \subsection*{Line Container}
 Container where you can add lines of the form $kx + m$, and query maximum values at points $x$.
 All operations are $\mathcal{O}(\log(n))$. For doubles, use \lstinline{inf = 1/.0} and \lstinline{div(a,b) = a/b}
 \lstinputlisting[language=C++]{code/line_container.cpp}
 
-\pagebreak
-
 \subsection*{Treap}
 \lstinputlisting[language=C++]{code/treap.cpp}
-
-\pagebreak
 
 \section*{Graph Algorithms}
 
@@ -200,12 +216,12 @@ are at least two distinct paths between any two nodes. Note that a node can
 be in several components. An edge which is not in a component is a bridge,
 i.e., not part of any cycle. Time complexity: $\mathcal{O}(E + V)$
 
-\lstinputlisting[language=C++]{code/biconnected_components.cpp}
+\lstinputlisting[language=C++, belowskip=0pt]{code/biconnected_components.cpp}
 
-\begin{lstlisting}[language=C++]
+\begin{lstlisting}[language=C++, firstnumber=34, aboveskip=0pt]
+
 //Usage:
-int eid = 0;
-ed.resize(N);
+int eid = 0; ed.resize(N);
 for each edge (a,b) {
     ed[a].emplace_back(b, eid);
     ed[b].emplace_back(a, eid++);
@@ -213,10 +229,12 @@ for each edge (a,b) {
 bicomps([&](const vi& edgelist) {...});
 \end{lstlisting}
 
-\pagebreak
+\section*{String}
+
+\subsection*{Polynomial Hash}
+\lstinputlisting[language=C++]{code/poly_hash.cpp}
 
 \section*{Matching \& Flow}
-
 
 \subsection*{Maximum Flow (Dinic's Algorithm)}
 
@@ -228,20 +246,21 @@ $\mathcal{O}(\min(E^{1/2}, V^{2/3})E)$ if $U = 1$.\\
 $\mathcal{O}(\sqrt{V}E)$ for bipartite matching.
 \lstinputlisting[language=C++]{code/max_flow.cpp}
 
-
 \subsection*{Minimum Cost Maximum Flow}
 
 Calculates min-cost max-flow. \lstinline{cap[i][j]!=cap[j][i]} is allowed; double edges are not. To obtain the actual flow, look at positive values only. Time complexity: Approximately $\mathcal{O}(E^2)$.
 
 If costs can be negative, call \lstinline{setpi} before \lstinline{maxflow}, but note that negative cost cycles are not supported.
 
-\lstinputlisting[language=C++,breakatwhitespace=true]{code/min_cost_max_flow.cpp}
+\lstinputlisting[language=C++]{code/min_cost_max_flow.cpp}
 
 \pagebreak
 
 \subsection*{Minimum Cost Bipartite Matching}
 Cost matrix must be square! L and R are outputs describing the matching. Negate costs for max cost. Time complexity: $\mathcal{O}(n^3)$
 \lstinputlisting[language=C++]{code/min_cost_matching.cpp}
+
+\pagebreak
 
 \section*{Math}
 
@@ -276,8 +295,6 @@ Usage (solves $x^2-3x+2 = 0$): \lstinline[language=C++]|poly_roots({{ 2, -3, 1 }
 
 \lstinputlisting[language=C++]{code/poly_roots.cpp}
 
-\pagebreak
-
 \subsection*{Fast Fourier Transform}
 \lstinline{fft(a)} computes $\hat f(k) = \sum_x a[x] \exp(2\pi i \cdot k x / N)$ for all $k$.\\
 Useful for convolution: \lstinline{conv(a, b)=c}, where $c[x] = \sum a[i]b[x-i]$.
@@ -287,22 +304,5 @@ Rounding is safe if $(\sum a_i^2 + \sum b_i^2)\log_2{N} < 9\cdot10^{14}$
 
 Time complexity: $\mathcal{O}(N \log N)$ with $N = |A|+|B|$ (about $1s$ for $N=4 \cdot 10^6$)
 \lstinputlisting[language=C++]{code/fft.cpp}
-
-\pagebreak
-
-\section*{Misc}
-
-\subsection*{Template}
-\lstinputlisting[language=C++]{code/common.hpp}
-
-\subsection*{Polynomial Hash}
-\lstinputlisting[language=C++]{code/poly_hash.cpp}
-
-\subsection*{Compilation Script}
-\lstinputlisting[language=bash]{scripts/compile.sh}
-
-\subsection*{Run Script}
-Usage: \lstinline{./run.sh path/to/sample/folder ./solution.bin}
-\lstinputlisting[language=bash]{scripts/run.sh}
 
 \end{document}
