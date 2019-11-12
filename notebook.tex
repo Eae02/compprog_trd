@@ -42,7 +42,7 @@
   stringstyle=\color[rgb]{0.58,0,0.82},
   commentstyle=\itshape\color{green!30!black},
   keywordstyle=\bfseries\color[HTML]{016477},
-  aboveskip=0.5 \baselineskip,
+  aboveskip=0.3 \baselineskip,
   belowskip=1.0 \baselineskip
 }
 
@@ -90,8 +90,8 @@ If a unique intersection is found, returns a list with only this point.
 If the segments intersect in many points, returns a list of 2 elements containing the
 start and end of the common line segment. If no intersection, returns an empty list
 \lstinputlisting[language=python]{code/geometry/intersect_ss.py}
-
 \subsection*{Intersection between two circles}
+
 Computes the pair of points at which two circles intersect. Returns \lstinline{None} in case of no intersection.
 \lstinputlisting[language=python]{code/geometry/intersect_cc.py}
 
@@ -251,6 +251,23 @@ Returns rank, or $-1$ if no solutions. Time complexity: $\mathcal{O}(n^2 m)$
 \lstinputlisting[language=C++]{code/solve_linear.cpp}
 
 
+\subsection*{Extended Euclidean Algorithm (python)}
+Finds the Greatest Common Divisor to the integers $a$ and $b$. Also finds two integers $x$ and $y$, such that $ax+by=\gcd(a,b)$.
+Returns a tuple of $(\gcd(a, b), x, y)$. If $a$ and $b$ are coprime, then $x$ is the inverse of $a \pmod{b}$.
+\lstinputlisting[language=python]{code/euclid.py}
+
+\subsection*{Extended Euclidean Algorithm (C++)}
+\lstinputlisting[language=C++]{code/euclid.cpp}
+
+\subsection*{Chinese Remainder Theorem (python)}
+Finds the smallest number $x$ satisfying a system of equations, each in the form $x = r_i \pmod{m_i}$. All pairs of $m_i$ must be coprime.
+\lstinline{eq} is a list of tuples describing the equations. The $i$:th tuple should be $(r_i, m_i)$.
+\lstinputlisting[language=python]{code/crt.py}
+
+\subsection*{Chinese Remainder Theorem (C++)}
+Similar to python version. Make sure that the product of all $m_i$ is less than $2^{62}$.
+\lstinputlisting[language=python]{code/crt.cpp}
+
 \subsection*{Polynomial Roots}
 
 Finds the real roots of a polynomial. Time complexity: $\mathcal{O}(n^2 \log(1/\epsilon))$.
@@ -259,6 +276,7 @@ Usage (solves $x^2-3x+2 = 0$): \lstinline[language=C++]|poly_roots({{ 2, -3, 1 }
 
 \lstinputlisting[language=C++]{code/poly_roots.cpp}
 
+\pagebreak
 
 \subsection*{Fast Fourier Transform}
 \lstinline{fft(a)} computes $\hat f(k) = \sum_x a[x] \exp(2\pi i \cdot k x / N)$ for all $k$.\\
