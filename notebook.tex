@@ -7,7 +7,7 @@
 \usepackage[default]{sourcesanspro}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
-\usepackage[margin=0.8in]{geometry}
+\usepackage[margin=0.8in, bmargin=0.7in]{geometry}
 \usepackage{titlesec}
 \usepackage{fancyhdr}
 \usepackage{graphicx}
@@ -167,14 +167,44 @@ All operations are $\mathcal{O}(\log(n))$. For doubles, use \lstinline{inf = 1/.
 
 \subsection*{Floyd Warshall}
 
-Calculates all-pairs shortest path in a directed graph in $\mathcal{O}(N^3)$.
-
-Input is an distance matrix $m$, where \lstinline{m[i][j]=inf} if $i$ and $j$ are not adjacent.
+Calculates all-pairs shortest path in a directed graph.
+Input is a distance matrix $m$, where \lstinline{m[i][j]=inf} if $i$ and $j$ are not adjacent.
 As output, \lstinline{m[i][j]} is set to the shortest distance between $i$ and $j$,
 \lstinline{inf} if no path, or \lstinline{-inf} if the path goes through a negative-weight cycle.
 
+Time complexity: $\mathcal{O}(N^3)$.
+
 \lstinputlisting[language=C++]{code/floyd_warshall.cpp}
 
+
+\subsection*{Bellman Ford}
+
+Calculates shortest paths from $s$ in a graph that might have negative edge weights.
+Unreachable nodes get \lstinline{dist = inf}; nodes reachable through negative-weight cycles get \lstinline{dist = -inf}.
+Assumes $V^2 \max |w_i| < 2^{63}$. Time complexity: $\mathcal{O}(VE)$
+
+\lstinputlisting[language=C++]{code/bellman_ford.cpp}
+
+\pagebreak
+
+\subsection*{2-SAT}
+
+Calculates a valid assignment to boolean variables in a 2-SAT problem.
+Negated variables are represented by bit-inversions (\lstinline{~x}).
+Time complexity: $\mathcal{O}(N+E)$, where $N$ is the number of boolean variables, and $E$ is the number of clauses.
+
+\lstinputlisting[language=C++]{code/2sat.cpp}
+
+Usage example:
+\begin{lstlisting}[language=C++]
+TwoSat ts(number of boolean variables);
+ts.either(0, ~3); // Var 0 is true or var 3 is false
+ts.set_value(2); // Var 2 is true
+ts.at_most_one({0,~1,2}); // <= 1 of vars 0, ~1 and 2 are true
+ts.solve(); // Returns true iff it is solvable. ts.values holds the assigned values to the variables
+\end{lstlisting}
+
+\pagebreak
 
 \subsection*{Strongly Connected Components}
 
@@ -188,25 +218,6 @@ lower index). ncomps will contain the number of components.
 
 \lstinputlisting[language=C++]{code/scc.cpp}
 
-\pagebreak
-
-\subsection*{2-SAT}
-
-Calculates a valid assignment to boolean variables $a, b, c,\ldots$ to a 2-SAT problem.
-Negated variables are represented by bit-inversions (~x).
-
-Time complexity: $\mathcal{O}(N+E)$, where $N$ is the number of boolean variables, and $E$ is the number of clauses.
-
-\lstinputlisting[language=C++]{code/2sat.cpp}
-\begin{lstlisting}[language=C++, aboveskip=0pt]
-//Usage:
-TwoSat ts(number of boolean variables);
-ts.either(0, ~3); // Var 0 is true or var 3 is false
-ts.set_value(2); // Var 2 is true
-ts.at_most_one({0,~1,2}); // <= 1 of vars 0, ~1 and 2 are true
-ts.solve(); // Returns true iff it is solvable. ts.values holds the assigned values to the variables
-\end{lstlisting}
-
 
 \subsection*{Biconnected Components}
 
@@ -216,11 +227,10 @@ are at least two distinct paths between any two nodes. Note that a node can
 be in several components. An edge which is not in a component is a bridge,
 i.e., not part of any cycle. Time complexity: $\mathcal{O}(E + V)$
 
-\lstinputlisting[language=C++, belowskip=0pt]{code/biconnected_components.cpp}
+\lstinputlisting[language=C++]{code/biconnected_components.cpp}
 
-\begin{lstlisting}[language=C++, firstnumber=34, aboveskip=0pt]
-
-//Usage:
+Usage example for biconnected components:
+\begin{lstlisting}[language=C++]
 int eid = 0; ed.resize(N);
 for each edge (a,b) {
     ed[a].emplace_back(b, eid);
@@ -229,12 +239,6 @@ for each edge (a,b) {
 bicomps([&](const vi& edgelist) {...});
 \end{lstlisting}
 
-\section*{String}
-
-\subsection*{Polynomial Hash}
-\lstinputlisting[language=C++]{code/poly_hash.cpp}
-
-\section*{Matching \& Flow}
 
 \subsection*{Maximum Flow (Dinic's Algorithm)}
 
@@ -278,9 +282,11 @@ Returns a tuple of $(\gcd(a, b), x, y)$. If $a$ and $b$ are coprime, then $x$ is
 \subsection*{Extended Euclidean Algorithm (C++)}
 \lstinputlisting[language=C++]{code/euclid.cpp}
 
+\pagebreak
+
 \subsection*{Chinese Remainder Theorem (python)}
-Finds the smallest number $x$ satisfying a system of equations, each in the form $x = r_i \pmod{m_i}$. All pairs of $m_i$ must be coprime.
-\lstinline{eq} is a list of tuples describing the equations. The $i$:th tuple should be $(r_i, m_i)$.
+Finds the smallest number $x$ satisfying a system of congruences, each in the form $x \equiv r_i \pmod{m_i}$. All pairs of $m_i$ must be coprime.
+\lstinline{eq} is a list of tuples describing the equations, the $i$:th of which should be $(r_i, m_i)$.
 \lstinputlisting[language=python]{code/crt.py}
 
 \subsection*{Chinese Remainder Theorem (C++)}
@@ -304,5 +310,8 @@ Rounding is safe if $(\sum a_i^2 + \sum b_i^2)\log_2{N} < 9\cdot10^{14}$
 
 Time complexity: $\mathcal{O}(N \log N)$ with $N = |A|+|B|$ (about $1s$ for $N=4 \cdot 10^6$)
 \lstinputlisting[language=C++]{code/fft.cpp}
+
+\section*{Polynomial Hash}
+\lstinputlisting[language=C++]{code/poly_hash.cpp}
 
 \end{document}

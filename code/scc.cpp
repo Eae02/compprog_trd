@@ -16,9 +16,9 @@ template<class G, class F> int dfs(int j, G& g, F& f) {
 	return val[j] = low;
 }
 template<class G, class F> void scc(G& g, F f) {
-	int n = g.size();
-	val.assign(n, 0); comp.assign(n, -1);
+	val.assign(g.size(), 0);
+	comp.assign(g.size(), -1);
 	Time = ncomps = 0;
-	for(int i = 0; i < n; i++)
+	for(size_t i = 0; i < g.size(); i++)
 		if (comp[i] < 0) dfs(i, g, f);
 }

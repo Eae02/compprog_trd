@@ -4,8 +4,7 @@ ll B = 260;
 struct PolyHash {
 	vector<ll> hashes, ex;
 	PolyHash(const string& s) : hashes(s.size()), ex(s.size() + 1) {
-		hashes[0] = s[0] + 1;
-		ex[0] = 1; ex[1] = B;
+		hashes[0] = s[0] + 1; ex[0] = 1; ex[1] = B;
 		for (size_t i = 1; i < s.size(); i++) {
 			hashes[i] = ((hashes[i - 1] * B) % P + s[i] + 1) % P;
 			ex[i + 1] = (ex[i] * B) % P;

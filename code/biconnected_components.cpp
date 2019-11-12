@@ -2,14 +2,13 @@ vector<int> num, st;
 vector<vector<pair<int, int>>> ed;
 int Time;
 template<class F> int dfs(int at, int par, F& f) {
-	int me = num[at] = ++Time, e, y, top = me;
+	int me = num[at] = ++Time, top = me;
 	for(auto& pa : ed[at]) {
 		if (pa.second == par) continue;
-		tie(y, e) = pa;
+		auto [y, e] = pa;
 		if (num[y]) {
 			top = min(top, num[y]);
-			if (num[y] < me)
-				st.push_back(e);
+			if (num[y] < me) st.push_back(e);
 		} else {
 			int si = st.size();
 			int up = dfs(y, e, f);
