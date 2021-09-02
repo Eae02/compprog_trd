@@ -1,4 +1,4 @@
-const ll inf = LLONG_MAX;
+const ll inf = 1LL << 62;
 struct Ed {
 	int a, b, w;
 	int s() { return a < b ? a : -a; }
@@ -19,8 +19,7 @@ void bellmanFord(vector<Node>& nodes, vector<Ed>& eds, int s) {
 			}
 		}
 	for(int i = 0; i < lim; i++)
-		for(auto& e : eds) {
+		for(auto& e : eds)
 			if (nodes[e.a].dist == -inf)
 				nodes[e.b].dist = -inf;
-		}
 }

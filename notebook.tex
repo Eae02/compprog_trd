@@ -148,28 +148,6 @@ All operations are $\mathcal{O}(\log(n))$. For doubles, use \lstinline{inf = 1/.
 
 \section*{Graph Algorithms}
 
-\subsection*{Floyd Warshall}
-
-Calculates all-pairs shortest path in a directed graph.
-Input is a distance matrix $m$, where \lstinline{m[i][j]=inf} if $i$ and $j$ are not adjacent.
-As output, \lstinline{m[i][j]} is set to the shortest distance between $i$ and $j$,
-\lstinline{inf} if no path, or \lstinline{-inf} if the path goes through a negative-weight cycle.
-
-Time complexity: $\mathcal{O}(N^3)$.
-
-\lstinputlisting[language=C++]{code/floyd_warshall.cpp}
-
-
-\subsection*{Bellman Ford}
-
-Calculates shortest paths from $s$ in a graph that might have negative edge weights.
-Unreachable nodes get \lstinline{dist = inf}; nodes reachable through negative-weight cycles get \lstinline{dist = -inf}.
-Assumes $V^2 \max |w_i| < 2^{63}$. Time complexity: $\mathcal{O}(VE)$
-
-\lstinputlisting[language=C++]{code/bellman_ford.cpp}
-
-\pagebreak
-
 \subsection*{2-SAT}
 
 Calculates a valid assignment to boolean variables in a 2-SAT problem.
@@ -188,6 +166,33 @@ ts.solve(); // Returns true iff it is solvable. ts.values holds the assigned val
 \end{lstlisting}
 
 \pagebreak
+
+\subsection*{Dijkstra's Algorithm}
+
+\lstinputlisting[language=C++]{code/dijkstra.cpp}
+
+\subsection*{Floyd Warshall}
+
+Calculates all-pairs shortest path in a directed graph.
+Input is a distance matrix $m$, where \lstinline{m[i][j]=inf} if $i$ and $j$ are not adjacent.
+As output, \lstinline{m[i][j]} is set to the shortest distance between $i$ and $j$,
+\lstinline{inf} if no path, or \lstinline{-inf} if the path goes through a negative-weight cycle.
+Time complexity: $\mathcal{O}(N^3)$.
+
+\lstinputlisting[language=C++]{code/floyd_warshall.cpp}
+
+
+\subsection*{Bellman Ford}
+
+Calculates shortest paths from $s$ in a graph that might have negative edge weights.
+Unreachable nodes get \lstinline{dist = inf}; nodes reachable through negative-weight cycles get \lstinline{dist = -inf}.
+Assumes $V^2 \max |w_i| < 2^{63}$. Time complexity: $\mathcal{O}(VE)$
+
+\lstinputlisting[language=C++]{code/bellman_ford.cpp}
+
+\pagebreak
+
+
 
 \subsection*{Strongly Connected Components}
 

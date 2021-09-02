@@ -8,7 +8,6 @@ void floydWarshall(vector<vector<ll>>& m) {
 			for(int j = 0; j < n; j++)
 				if (m[i][k] != inf && m[k][j] != inf)
 					m[i][j] = min(m[i][j], max(m[i][k] + m[k][j], -inf));
-	
 	//only needed if weights can be negative:
 	for(int k = 0; k < n; k++)
 		if (m[k][k] < 0)
