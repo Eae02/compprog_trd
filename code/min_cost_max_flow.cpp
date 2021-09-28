@@ -62,9 +62,7 @@ struct MCMF {
 				totcost += cost[i][j] * flow[i][j];
 		return { totflow, totcost };
 	}
-	
-	// optional, if some costs can be negative, call this before maxflow
-	void setpi(int s) {
+	void setpi(int s) { // optional, if some costs can be negative, call this before maxflow
 		fill(all(pi), INF); pi[s] = 0;
 		int it = N, ch = 1; ll v;
 		while (ch-- && it--)

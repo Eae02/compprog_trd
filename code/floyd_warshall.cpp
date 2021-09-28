@@ -1,5 +1,5 @@
 const ll inf = 1LL << 62;
-void floydWarshall(vector<vector<ll>>& m) {
+void floydWarshall(vector<vector<ll>>& m) { // m[i][j] should be inf if i and j are not adjacent
 	int n = m.size();
 	for(int i = 0; i < n; i++)
 		m[i][i] = min(m[i][i], 0LL);

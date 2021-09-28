@@ -36,7 +36,6 @@ struct TwoSat {
 				return 0;
 		return 1;
 	}
-	
 	/* optional */ int add_var() {
 		gr.emplace_back();
 		gr.emplace_back();

@@ -1,5 +1,4 @@
-vector<int> val, comp, z, cont;
-int Time, ncomps;
+vector<int> val, comp, z, cont; int Time, ncomps;
 template<class G, class F> int dfs(int j, G& g, F& f) {
 	int low = val[j] = ++Time, x; z.push_back(j);
 	for(auto& e : g[j]) if (comp[e] < 0)

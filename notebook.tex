@@ -60,6 +60,12 @@
 Usage: \lstinline{./run.sh path/to/sample/folder ./solution.bin}
 \lstinputlisting[language=bash]{scripts/run.sh}
 
+\subsection*{Polynomial Hash}
+\lstinputlisting[language=C++]{code/poly_hash.cpp}
+
+\subsection*{Binary Search}
+\lstinputlisting[language=C++]{code/binary_search.cpp}
+
 \section*{Geometry}
 
 \subsection*{Geometry Template}
@@ -97,8 +103,6 @@ Returns true if the point \lstinline{pt} lies within the polygon \lstinline{poly
 If strict is true, returns false for points on the boundary.
 \lstinputlisting[language=python]{code/geometry/point_in_polygon.py}
 
-\pagebreak
-
 \subsection*{Polygon area}
 Returns twice the signed area of a polygon. Clockwise enumeration gives negative area.
 \lstinputlisting[language=python]{code/geometry/polygon_area.py}
@@ -106,6 +110,8 @@ Returns twice the signed area of a polygon. Clockwise enumeration gives negative
 \subsection*{Intersection between two circles}
 Computes the pair of points at which two circles intersect. Returns \lstinline{None} in case of no intersection.
 \lstinputlisting[language=python]{code/geometry/intersect_cc.py}
+
+\pagebreak
 
 \subsection*{Convex hull (python)}
 Returns a list of points on the convex hull in counter-clockwise order.
@@ -116,12 +122,15 @@ Time complexity: $\mathcal{O}(n \log n)$
 \subsection*{Convex hull (C++)}
 \lstinputlisting[language=C++]{code/geometry/convex_hull.cpp}
 
-\pagebreak
-
 \section*{Data Structures}
 
-\subsection*{Segment Tree}
+\subsection*{Segment Tree (C++)}
 \lstinputlisting[language=C++]{code/segtree.cpp}
+
+\pagebreak
+
+\subsection*{Segment Tree (python)}
+\lstinputlisting[language=python]{code/segtree.py}
 
 \subsection*{Fenwick Tree}
 \lstinputlisting[language=C++, aboveskip=0pt]{code/fenwick_tree.cpp}
@@ -148,39 +157,8 @@ All operations are $\mathcal{O}(\log(n))$. For doubles, use \lstinline{inf = 1/.
 
 \section*{Graph Algorithms}
 
-\subsection*{2-SAT}
-
-Calculates a valid assignment to boolean variables in a 2-SAT problem.
-Negated variables are represented by bit-inversions (\lstinline{~x}).
-Time complexity: $\mathcal{O}(N+E)$, where $N$ is the number of boolean variables, and $E$ is the number of clauses.
-
-\lstinputlisting[language=C++]{code/2sat.cpp}
-
-Usage example:
-\begin{lstlisting}[language=C++]
-TwoSat ts(number of boolean variables);
-ts.either(0, ~3); // Var 0 is true or var 3 is false
-ts.set_value(2); // Var 2 is true
-ts.at_most_one({0,~1,2}); // <= 1 of vars 0, ~1 and 2 are true
-ts.solve(); // Returns true iff it is solvable. ts.values holds the assigned values to the variables
-\end{lstlisting}
-
-\pagebreak
-
 \subsection*{Dijkstra's Algorithm}
-
 \lstinputlisting[language=C++]{code/dijkstra.cpp}
-
-\subsection*{Floyd Warshall}
-
-Calculates all-pairs shortest path in a directed graph.
-Input is a distance matrix $m$, where \lstinline{m[i][j]=inf} if $i$ and $j$ are not adjacent.
-As output, \lstinline{m[i][j]} is set to the shortest distance between $i$ and $j$,
-\lstinline{inf} if no path, or \lstinline{-inf} if the path goes through a negative-weight cycle.
-Time complexity: $\mathcal{O}(N^3)$.
-
-\lstinputlisting[language=C++]{code/floyd_warshall.cpp}
-
 
 \subsection*{Bellman Ford}
 
@@ -190,42 +168,21 @@ Assumes $V^2 \max |w_i| < 2^{63}$. Time complexity: $\mathcal{O}(VE)$
 
 \lstinputlisting[language=C++]{code/bellman_ford.cpp}
 
-\pagebreak
+\subsection*{Floyd Warshall (python)}
+
+Calculates all-pairs shortest path in a directed graph.
+As output, \lstinline{m[i][j]} is set to the shortest distance between $i$ and $j$,
+\lstinline{inf} if no path, or \lstinline{-inf} if the path goes through a negative-weight cycle.
+Time complexity: $\mathcal{O}(N^3)$.
+
+\lstinputlisting[language=python]{code/floyd_warshall.py}
+
+\subsection*{Floyd Warshall (C++)}
+
+\lstinputlisting[language=C++]{code/floyd_warshall.cpp}
 
 
 
-\subsection*{Strongly Connected Components}
-
-Finds strongly connected components in a directed graph. If vertices $u, v$ belong to the same component, we can reach $u$ from $v$ and vice versa.
-Time complexity: $\mathcal{O}(E + V)$
-
-Usage: \lstinline|scc(graph, [&](vector<int>& v) { ... })}| visits all components
-in reverse topological order. \texttt{comp[i]} holds the component
-index of a node (a component only has edges to components with
-lower index). ncomps will contain the number of components.
-
-\lstinputlisting[language=C++]{code/scc.cpp}
-
-
-\subsection*{Biconnected Components}
-
-Finds all biconnected components in an undirected graph, and
-runs a callback for the edges in each. In a biconnected component there
-are at least two distinct paths between any two nodes. Note that a node can
-be in several components. An edge which is not in a component is a bridge,
-i.e., not part of any cycle. Time complexity: $\mathcal{O}(E + V)$
-
-\lstinputlisting[language=C++]{code/biconnected_components.cpp}
-
-Usage example for biconnected components:
-\begin{lstlisting}[language=C++]
-int eid = 0; ed.resize(N);
-for each edge (a,b) {
-    ed[a].emplace_back(b, eid);
-    ed[b].emplace_back(a, eid++);
-}
-bicomps([&](const vi& edgelist) {...});
-\end{lstlisting}
 
 
 \subsection*{Maximum Flow (Dinic's Algorithm)}
@@ -238,14 +195,6 @@ $\mathcal{O}(\min(E^{1/2}, V^{2/3})E)$ if $U = 1$.\\
 $\mathcal{O}(\sqrt{V}E)$ for bipartite matching.
 \lstinputlisting[language=C++]{code/max_flow.cpp}
 
-\subsection*{Minimum Cost Maximum Flow}
-
-Calculates min-cost max-flow. \lstinline{cap[i][j]!=cap[j][i]} is allowed; double edges are not. To obtain the actual flow, look at positive values only. Time complexity: Approximately $\mathcal{O}(E^2)$.
-
-If costs can be negative, call \lstinline{setpi} before \lstinline{maxflow}, but note that negative cost cycles are not supported.
-
-\lstinputlisting[language=C++]{code/min_cost_max_flow.cpp}
-
 \pagebreak
 
 \subsection*{Minimum Cost Bipartite Matching}
@@ -254,13 +203,85 @@ Cost matrix must be square! L and R are outputs describing the matching. Negate 
 
 \pagebreak
 
+\subsection*{Minimum Cost Maximum Flow}
+
+Calculates min-cost max-flow. \lstinline{cap[i][j]!=cap[j][i]} is allowed; double edges are not. To obtain the actual flow, look at positive values only. Time complexity: Approximately $\mathcal{O}(E^2)$.
+
+If costs can be negative, call \lstinline{setpi} before \lstinline{maxflow}, but note that negative cost cycles are not supported.
+
+\lstinputlisting[language=C++]{code/min_cost_max_flow.cpp}
+
+
+
+
+
+
+\subsection*{2-SAT}
+
+Calculates a valid assignment to boolean variables in a 2-SAT problem.
+Negated variables are represented by bit-inversions (\lstinline{~x}).
+Time complexity: $\mathcal{O}(N+E)$, where $N$ is the number of boolean variables, and $E$ is the number of clauses.
+
+\lstinputlisting[language=C++]{code/2sat.cpp}
+
+
+
+\subsection*{Biconnected Components}
+
+Finds all biconnected components in an undirected graph, and
+runs a callback for the edges in each. Note that a node can
+be in several components. An edge which is not in a component is a bridge. Time complexity: $\mathcal{O}(E + V)$
+
+\lstinputlisting[language=C++]{code/biconnected_components.cpp}
+
+Usage example:
+\begin{lstlisting}[language=C++]
+int eid = 0; ed.resize(N);
+for each edge (a,b) {
+    ed[a].emplace_back(b, eid);
+    ed[b].emplace_back(a, eid++);
+}
+bicomps([&](const vector<int>& edgelist) {...});
+\end{lstlisting}
+
+\subsection*{Strongly Connected Components}
+
+Finds strongly connected components in a directed graph.
+Usage: \lstinline|scc(graph, [&](vector<int>& v) { ... })}| visits all components
+in reverse topological order. \texttt{comp[i]} holds the component
+index of a node (a component only has edges to components with
+lower index). \texttt{ncomps} will contain the number of components.
+Time complexity: $\mathcal{O}(E + V)$
+
+\lstinputlisting[language=C++]{code/scc.cpp}
+
+Usage example:
+\begin{lstlisting}[language=C++]
+TwoSat ts(number of boolean variables);
+ts.either(0, ~3); // Var 0 is true or var 3 is false
+ts.set_value(2); // Var 2 is true
+ts.at_most_one({0,~1,2}); // <= 1 of vars 0, ~1 and 2 are true
+ts.solve(); // Returns true iff it is solvable. ts.values holds the assigned values to the variables
+\end{lstlisting}
+
 \section*{Math}
+
+\subsection*{Fast Fourier Transform}
+\lstinline{fft(a)} computes $\hat f(k) = \sum_x a[x] \exp(2\pi i \cdot k x / N)$ for all $k$.\\
+Useful for convolution: \lstinline{conv(a, b)=c}, where $c[x] = \sum a[i]b[x-i]$.
+
+Rounding is safe if $(\sum a_i^2 + \sum b_i^2)\log_2{N} < 9\cdot10^{14}$
+(in practice $10^{16}$; higher for random inputs).
+
+Time complexity: $\mathcal{O}(N \log N)$ with $N = |A|+|B|$ (about $1s$ for $N=4 \cdot 10^6$)
+\lstinputlisting[language=C++]{code/fft.cpp}
+
+\pagebreak
 
 \subsection*{Solve Linear System of Equations}
 Solves $A x = b$. If there are multiple solutions, an arbitrary one is returned.
 Returns rank, or $-1$ if no solutions. Time complexity: $\mathcal{O}(n^2 m)$
 \lstinputlisting[language=C++]{code/solve_linear.cpp}
-
 
 \subsection*{Extended Euclidean Algorithm (python)}
 Finds the Greatest Common Divisor to the integers $a$ and $b$. Also finds two integers $x$ and $y$, such that $ax+by=\gcd(a,b)$.
@@ -289,17 +310,6 @@ Usage (solves $x^2-3x+2 = 0$): \lstinline[language=C++]|poly_roots({{ 2, -3, 1 }
 
 \lstinputlisting[language=C++]{code/poly_roots.cpp}
 
-\subsection*{Fast Fourier Transform}
-\lstinline{fft(a)} computes $\hat f(k) = \sum_x a[x] \exp(2\pi i \cdot k x / N)$ for all $k$.\\
-Useful for convolution: \lstinline{conv(a, b)=c}, where $c[x] = \sum a[i]b[x-i]$.
 
-Rounding is safe if $(\sum a_i^2 + \sum b_i^2)\log_2{N} < 9\cdot10^{14}$
-(in practice $10^{16}$; higher for random inputs).
-
-Time complexity: $\mathcal{O}(N \log N)$ with $N = |A|+|B|$ (about $1s$ for $N=4 \cdot 10^6$)
-\lstinputlisting[language=C++]{code/fft.cpp}
-
-\section*{Polynomial Hash}
-\lstinputlisting[language=C++]{code/poly_hash.cpp}
 
 \end{document}
