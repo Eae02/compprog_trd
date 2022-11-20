@@ -27,7 +27,7 @@ private:
 			nodes[n].p = val;
 			nodes[n].val = val; // val * (nhi - nlo) for sum queries
 			//for interval add:
-			nodes[n].p = nodes[n].p.get_or(0) + val;
+			nodes[n].p = nodes[n].p.value_or(0) + val;
 			nodes[n].val += val; // val * (nhi - nlo) for sum queries
 		} else {
 			push(n, nlo, nhi); LST_NEXT;
