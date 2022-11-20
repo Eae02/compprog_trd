@@ -4,5 +4,5 @@ def crt(eq):
 		p *= md
 	for rem, md in eq:
 		pp = p // md
-		res = (res + rem * extEuclid(pp, md)[1] * pp) % p
+		res = (res + rem*extEuclid(pp, md)[1]*pp) % p
 	return res

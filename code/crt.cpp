@@ -1,3 +1,4 @@
+//no overflow if the product of all eq.second < 2^62
 ll crt(const vector<pair<ll, ll>>& eq) {
 	ll p = 1, res = 0;
 	for (auto e : eq) p *= e.second;

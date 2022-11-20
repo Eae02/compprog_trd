@@ -3,8 +3,8 @@ def intersectCC(c1, c2, r1, r2):
 		assert(r1 != r2)
 		return None
 	vec = vecsub(c2, c1)
-	d2, sm, dif = len2(vec), r1 + r2, r1 - r2
-	if sm ** 2 < d2 or dif ** 2 > d2:
+	d2 = len2(vec)
+	if (r1 + r2) ** 2 < d2 or (r1 - r2) ** 2 > d2:
 		return None
 	p = (d2 + r1 ** 2 - r2 ** 2) / (d2 * 2)
 	h2 = r1 ** 2 - p * p * d2

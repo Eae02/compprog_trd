@@ -12,8 +12,9 @@ class SegTree:
 		while pos > 1:
 			pos //= 2
 			self.s[pos] = SegTree.f(self.s[pos * 2], self.s[pos * 2 + 1])
-	def query(self, lo, hi): # query lo to hi (hi not included)
-		ra, rb, lo, hi = self.UNIT, self.UNIT, lo + self.n, hi + self.n
+	def query(self, lo, hi): # hi not included
+		ra, rb = self.UNIT, self.UNIT
+		lo, hi = lo + self.n, hi + self.n
 		while lo < hi:
 			if lo % 2:
 				ra = SegTree.f(ra, self.s[lo])
