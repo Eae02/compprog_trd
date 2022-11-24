@@ -386,6 +386,9 @@ Returns rank, or $-1$ if no solutions. Time complexity: $\mathcal{O}(n^2 m)$
 
 \newpage
 
+\subsection*{Matrix Multiplication}
+\lstinputlisting[language=python]{code/matrix_mul.py}
+
 \subsection*{Matrix Inverse}
 Invert matrix $A$. Returns rank; result is stored in $A$ unless singular (rank < n). Time complexity: $\mathcal{O}(n^3)$
 \lstinputlisting[language=C++]{code/matrix_invert.cpp}
@@ -394,6 +397,8 @@ Invert matrix $A$. Returns rank; result is stored in $A$ unless singular (rank <
 Finds the real roots of a polynomial. Time complexity: $\mathcal{O}(n^2 \log(1/\epsilon))$.\\
 Usage (solves $x^2-3x+2 = 0$): \lstinline[language=C++]|poly_roots({{ 2, -3, 1 }},-1e9,1e9)|
 \lstinputlisting[language=C++]{code/poly_roots.cpp}
+
+\vspace*{-0.3cm}
 
 \subsection*{FFT}
 \lstinline{fft(a)} computes $\hat f(k) = \sum_x a[x] \exp(2\pi i \cdot k x / N)$ for all $k$.
