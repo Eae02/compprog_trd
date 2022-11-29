@@ -249,10 +249,9 @@ For node \lstinline{i}, \lstinline{arridx[i]} is the array index for range queri
 \lstinline{hchild[i]} is the heavy child (or $-1$ for leaf nodes), and
 \lstinline{hpLeaf[i]} and \lstinline{hpRoot[i]} are the leaf and root nodes respectively of the heavy path passing through node \lstinline{i}.
 
-\lstinline{lca(a, b)} returns the lca of a and b (in $\mathcal{O}(\log(n))$).
-If \lstinline{intv} is not null, \lstinline{*intv} will receive up to
-$2\log_2(n)$ intervals such that for all nodes \lstinline{x} on the path between \lstinline{a} and \lstinline{b},
-there is exactly one \lstinline{i} where \lstinline{intv[i].first <= arridx[x] < intv[i].second}.\\
+\lstinline{lca(a, b)} returns the lca of a and b.
+If \lstinline{intv} is not null, \lstinline{*intv} will receive up to $2\log_2(n)$ non-overlapping intervals
+such that there exists an interval \lstinline{i} $\in$ \lstinline{*intv} where \lstinline{i.first <= arridx[x] < i.second} iff. the node \lstinline{x} is on the path between a and b.\\
 If \lstinline{intvIncludeLCA} is false, the lca of a and b will not be included in these intervals.
 
 \lstinputlisting[language=cpp]{code/hld.cpp}

@@ -43,9 +43,9 @@ struct HLD { /**
 			hpLeaf[trav[i]] = hpLeaf[hchild[trav[i]]];
 		}
 	} /**
-	 * Returns the lca of a and b. If intv is not null, *intv will receive up to
-	 * 2log_2(n) intervals such that for all nodes x on the path between a and b,
-	 * there is exactly one i where intv[i].first <= arridx[x] < intv[i].second.
+	 * Returns the lca of a and b. If intv is not null, *intv will receive up to $2\log_2(n)$
+	 * non-overlapping intervals such that there exists an interval i in *intv where
+	 * i.first <= arridx[x] < i.second iff. the node x is on the path between a and b.
 	 * If intvIncludeLCA is false, the lca of a and b will not be included in these intervals.
 	 */
 	ll lca(ll a, ll b, vector<pair<ll, ll>>* intv = nullptr, bool intvIncludeLCA = true) {
