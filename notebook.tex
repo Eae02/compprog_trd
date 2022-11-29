@@ -243,18 +243,20 @@ All operations are $\mathcal{O}(\log(n))$. For doubles, use \lstinline{inf = 1/.
 \newpage
 
 \subsection*{Heavy-Light Decomposition}
-Constructs a heavy-light decomposition of a tree and generates array indices for nodes that can be used in range queries.
+Constructs a heavy-light decomposition of a tree and generates indices for nodes that are consecutive within each heavy path.
 
-For node \lstinline{i}, \lstinline{arridx[i]} is the array index for range queries (in the range $(0,n]$), 
-\lstinline{hchild[i]} is the heavy child (or $-1$ for leaf nodes), and
-\lstinline{hpLeaf[i]} and \lstinline{hpRoot[i]} are the leaf and root nodes respectively of the heavy path passing through node \lstinline{i}.
+For node \lstinline{i}, \lstinline{hchild[i]} is the heavy child (or $-1$ for leaf nodes),
+\lstinline{hpLeaf[i]} and \lstinline{hpRoot[i]} are the leaf and root nodes of the heavy path passing through the node,
+and \lstinline{arridx[i]} is the generated heavy path consecutive index (in the range $(0,n]$).
+Within one heavy path, the deepest node has the lowest \lstinline{arridx[i]};
 
 \lstinline{lca(a, b)} returns the lca of a and b.
 If \lstinline{intv} is not null, \lstinline{*intv} will receive up to $2\log_2(n)$ non-overlapping intervals
 such that there exists an interval \lstinline{i} $\in$ \lstinline{*intv} where \lstinline{i.first <= arridx[x] < i.second} iff. the node \lstinline{x} is on the path between a and b.\\
 If \lstinline{intvIncludeLCA} is false, the lca of a and b will not be included in these intervals.
+\lstinputlisting[language=cpp]{code/heavy_light_decomposition.cpp}
 
-\lstinputlisting[language=cpp]{code/hld.cpp}
+\pagebreak
 
 \subsection*{Link Cut Tree}
 Represents a forest of unrooted trees. You can add and remove edges (as long as the result is still a forest), and check whether two nodes are in the same tree.

@@ -49,24 +49,21 @@ struct HLD { /**
 	 * If intvIncludeLCA is false, the lca of a and b will not be included in these intervals.
 	 */
 	ll lca(ll a, ll b, vector<pair<ll, ll>>* intv = nullptr, bool intvIncludeLCA = true) {
-		vector<ll> plo;
 		auto sdepth = [&] (ll i) { return i == -1 ? -1 : depth[i]; };
+		auto addi = [&] (ll lo, ll hi) { if (intv && lo != hi) intv->emplace_back(lo, hi); };
 		while (hpRoot[a] != hpRoot[b]) {
 			ll nxa = parent[hpRoot[a]];
 			ll nxb = parent[hpRoot[b]];
 			if (sdepth(nxa) > sdepth(nxb)) {
-				plo.push_back(a);
+				addi(arridx[a], arridx[hpRoot[a]] + 1);
 				a = nxa;
 			} else {
-				plo.push_back(b);
+				addi(arridx[b], arridx[hpRoot[b]] + 1);
 				b = nxb;
 			}
 		}
 		if (depth[a] > depth[b])
 			swap(a, b);
-		auto addi = [&] (ll lo, ll hi) { if (intv && lo != hi) intv->emplace_back(lo, hi); };
-		for (ll pl : plo)
-			addi(arridx[pl], arridx[hpRoot[pl]] + (hpRoot[pl] != a));
 		addi(arridx[b], arridx[a] + intvIncludeLCA);
 		return a;
 	}
