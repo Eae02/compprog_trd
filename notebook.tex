@@ -3,7 +3,7 @@
 \usepackage{listings}
 \usepackage{xcolor}
 \usepackage{amsmath}
-\usepackage[default]{sourcecodepro}
+\usepackage[default, semibold]{sourcecodepro}
 \usepackage[default]{sourcesanspro}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
@@ -33,7 +33,7 @@
 \titlespacing{\section}{0pt}{0.5em}{0.5em}
 \titlespacing{\subsection}{0pt}{0pt}{0.2em}
 
-\lstset{ 
+\lstset{
   backgroundcolor=\color{white},
   basicstyle=\ttfamily\footnotesize,
   breakatwhitespace=true,
@@ -46,10 +46,15 @@
   numberstyle=\tiny\color{black!50},
   stringstyle=\color[rgb]{0.58,0,0.82},
   commentstyle=\itshape\color{green!30!black},
-  keywordstyle=\bfseries\color[HTML]{016477},
+  keywordstyle=\bfseries\color[HTML]{004d80},
   aboveskip=0.3 \baselineskip,
   belowskip=1.0 \baselineskip,
   postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space}
+}
+
+\lstdefinelanguage{cpp}[]{C++}{
+  morecomment=[is]{/**}{*/},
+  morekeywords={ll, vector, pair, array, nullptr}
 }
 
 \begin{document}
@@ -57,16 +62,16 @@
 \section*{Misc}
 
 \subsection*{Template}
-\lstinputlisting[language=C++]{code/common.hpp}
+\lstinputlisting[language=cpp]{code/common.hpp}
 
 \subsection*{Compilation Script}
 \lstinputlisting[language=bash]{scripts/compile.sh}
 
 \subsection*{Polynomial Hash}
-\lstinputlisting[language=C++]{code/poly_hash.cpp}
+\lstinputlisting[language=cpp]{code/poly_hash.cpp}
 
 \subsection*{Binary Search}
-\lstinputlisting[language=C++]{code/binary_search.cpp}
+\lstinputlisting[language=cpp]{code/binary_search.cpp}
 
 \subsection*{Ternary Search}
 Find the smallest i in $[a,b]$ that maximizes $f(i)$, assuming that $f(a) < \dots < f(i) \ge \dots \ge f(b)$.
@@ -74,7 +79,7 @@ Find the smallest i in $[a,b]$ that maximizes $f(i)$, assuming that $f(a) < \dot
 If there is a range of $f(i) \dots f(j)$ that are equal, change according to the comments to get the last index instead of the first.
 
 \begin{multicols}{2}
-  \lstinputlisting[language=C++]{code/ternary_search.cpp}
+  \lstinputlisting[language=cpp]{code/ternary_search.cpp}
   \columnbreak
   \lstinputlisting[language=python]{code/ternary_search.py}
 \end{multicols}
@@ -85,16 +90,16 @@ If there is a range of $f(i) \dots f(j)$ that are equal, change according to the
 \lstinputlisting[language=python]{code/geometry_py/geometry.py}
 
 \subsection*{Geometry Template (C++)}
-\lstinputlisting[language=C++]{code/geometry_cpp/geometry.cpp}
+\lstinputlisting[language=cpp]{code/geometry_cpp/geometry.cpp}
 
 \subsection*{Check if point is on a line segment}
 \lstinputlisting[language=python]{code/geometry_py/on_segment.py}
-\lstinputlisting[language=C++]{code/geometry_cpp/on_segment.cpp}
+\lstinputlisting[language=cpp]{code/geometry_cpp/on_segment.cpp}
 
 \subsection*{Distance between point and line segment}
 Returns the distance from the point p to the line segment starting at s and ending at e.
 \begin{multicols}{2}
-  \lstinputlisting[language=C++]{code/geometry_cpp/dist_ps.cpp}
+  \lstinputlisting[language=cpp]{code/geometry_cpp/dist_ps.cpp}
   \columnbreak
   \lstinputlisting[language=python]{code/geometry_py/dist_ps.py}
 \end{multicols}
@@ -104,7 +109,7 @@ Returns the distance from the point p to the line segment starting at s and endi
 \subsection*{Distance between point and line}
 Returns the signed distance from the point p to the line passing through the points a and b.
 \begin{multicols}{2}
-  \lstinputlisting[language=C++]{code/geometry_cpp/dist_pl.cpp}
+  \lstinputlisting[language=cpp]{code/geometry_cpp/dist_pl.cpp}
   \columnbreak
   \lstinputlisting[language=python]{code/geometry_py/dist_pl.py}
 \end{multicols}
@@ -113,7 +118,7 @@ Returns the signed distance from the point p to the line passing through the poi
 Projects the point p onto the line passing through a and b.
 Set \lstinline{refl=True} to get reflection of point p across the line instead.
 \begin{multicols}{2}
-  \lstinputlisting[language=C++]{code/geometry_cpp/proj_pl.cpp}
+  \lstinputlisting[language=cpp]{code/geometry_cpp/proj_pl.cpp}
   \columnbreak
   \lstinputlisting[language=python]{code/geometry_py/proj_pl.py}
 \end{multicols}
@@ -122,7 +127,7 @@ Set \lstinline{refl=True} to get reflection of point p across the line instead.
 If a unique intersection point of the lines going through \lstinline{s1,e1} and \lstinline{s2,e2} exists \lstinline{(1,point)} is returned.\\
 If no intersection point exists \lstinline{(0,(0,0))} is returned and if infinitely many exist \lstinline{(-1,(0,0))} is returned.
 \begin{multicols}{2}
-  \lstinputlisting[language=C++]{code/geometry_cpp/intersect_ll.cpp}
+  \lstinputlisting[language=cpp]{code/geometry_cpp/intersect_ll.cpp}
   \columnbreak
   \lstinputlisting[language=python]{code/geometry_py/intersect_ll.py}
 \end{multicols}
@@ -133,7 +138,7 @@ If the segments intersect in many points, returns a list of 2 elements containin
 start and end of the common line segment. If no intersection, returns an empty list
 
 \begin{multicols}{2}
-  \lstinputlisting[language=C++]{code/geometry_cpp/intersect_ss.cpp}
+  \lstinputlisting[language=cpp]{code/geometry_cpp/intersect_ss.cpp}
   \columnbreak
   \lstinputlisting[language=python]{code/geometry_py/intersect_ss.py}
 \end{multicols}
@@ -141,7 +146,7 @@ start and end of the common line segment. If no intersection, returns an empty l
 \subsection*{Polygon area}
 Returns twice the signed area of a polygon. Clockwise enumeration gives negative area.
 \begin{multicols}{2}
-  \lstinputlisting[language=C++]{code/geometry_cpp/polygon_area.cpp}
+  \lstinputlisting[language=cpp]{code/geometry_cpp/polygon_area.cpp}
   \columnbreak
   \lstinputlisting[language=python]{code/geometry_py/polygon_area.py}
 \end{multicols}
@@ -152,12 +157,12 @@ Returns twice the signed area of a polygon. Clockwise enumeration gives negative
 Returns true if the point \lstinline{pt} lies within the polygon \lstinline{poly}.
 If strict is true, returns false for points on the boundary.
 \lstinputlisting[language=python]{code/geometry_py/point_in_polygon.py}
-\lstinputlisting[language=C++]{code/geometry_cpp/point_in_polygon.cpp}
+\lstinputlisting[language=cpp]{code/geometry_cpp/point_in_polygon.cpp}
 
 \subsection*{Intersection between two circles}
 Computes the pair of points at which two circles intersect. Returns \lstinline{None} in case of no intersection.
 \begin{multicols}{2}
-  \lstinputlisting[language=C++]{code/geometry_cpp/intersect_cc.cpp}
+  \lstinputlisting[language=cpp]{code/geometry_cpp/intersect_cc.cpp}
   \columnbreak
   \lstinputlisting[language=python]{code/geometry_py/intersect_cc.py}
 \end{multicols}
@@ -165,7 +170,7 @@ Computes the pair of points at which two circles intersect. Returns \lstinline{N
 \subsection*{Intersection between circle and line}
 Computes the intersection between a circle and a line. Returns a list of either 0, 1, or 2 intersection points.
 \begin{multicols}{2}
-  \lstinputlisting[language=C++]{code/geometry_cpp/intersect_cl.cpp}
+  \lstinputlisting[language=cpp]{code/geometry_cpp/intersect_cl.cpp}
   \columnbreak
   \lstinputlisting[language=python]{code/geometry_py/intersect_cl.py}
 \end{multicols}
@@ -173,7 +178,7 @@ Computes the intersection between a circle and a line. Returns a list of either 
 \subsection*{Circumcircle}
 Returns a circle from three points.
 \begin{multicols}{2}
-  \lstinputlisting[language=C++]{code/geometry_cpp/circumcircle.cpp}
+  \lstinputlisting[language=cpp]{code/geometry_cpp/circumcircle.cpp}
   \columnbreak
   \lstinputlisting[language=python]{code/geometry_py/circumcircle.py}
 \end{multicols}
@@ -181,7 +186,7 @@ Returns a circle from three points.
 \subsection*{Circle-polygon area}
 Returns the area of the intersection of a circle with a counter-clockwise polygon.
 Time complexity: $\mathcal{O}(n)$
-\lstinputlisting[language=C++]{code/geometry_cpp/circle_poly_area.cpp}
+\lstinputlisting[language=cpp]{code/geometry_cpp/circle_poly_area.cpp}
 
 \subsection*{Circle tangents}
 Finds the external tangents of two circles, or internal if r2 is negated.\\
@@ -190,7 +195,7 @@ Can return 0, 1, or 2 tangents -- 0 if one circle contains the other (or overlap
 .first and .second give the tangency points at circle 1 and 2 respectively.
 To find the tangents of a circle with a point set r2 to 0.
 \begin{multicols}{2}
-  \lstinputlisting[language=C++]{code/geometry_cpp/circle_tangents.cpp}
+  \lstinputlisting[language=cpp]{code/geometry_cpp/circle_tangents.cpp}
   \columnbreak
   \lstinputlisting[language=python]{code/geometry_py/circle_tangents.py}
 \end{multicols}
@@ -200,7 +205,7 @@ Returns a list of points on the convex hull in counter-clockwise order.
 Points on the edge of the hull between two other points are not considered part of the hull.
 Time complexity: $\mathcal{O}(n \log n)$
 \begin{multicols}{2}
-  \lstinputlisting[language=C++]{code/geometry_cpp/convex_hull.cpp}
+  \lstinputlisting[language=cpp]{code/geometry_cpp/convex_hull.cpp}
   \columnbreak
   \lstinputlisting[language=python]{code/geometry_py/convex_hull.py}
 \end{multicols}
@@ -209,42 +214,57 @@ Time complexity: $\mathcal{O}(n \log n)$
 
 \subsection*{Segment Tree}
 \begin{multicols}{2}
-  \lstinputlisting[language=C++]{code/segtree.cpp}
+  \lstinputlisting[language=cpp]{code/segtree.cpp}
   \columnbreak
   \lstinputlisting[language=python]{code/segtree.py}
 \end{multicols}
 
 \subsection*{Fenwick Tree}
-\lstinputlisting[language=C++, aboveskip=0pt]{code/fenwick_tree.cpp}
+\lstinputlisting[language=cpp, aboveskip=0pt]{code/fenwick_tree.cpp}
 
 \subsection*{Sparse Table}
-\lstinputlisting[language=C++, aboveskip=0pt]{code/sparse_table.cpp}
+\lstinputlisting[language=cpp, aboveskip=0pt]{code/sparse_table.cpp}
 
 \subsection*{Lazy Segment Tree}
 Segment tree with support for range updates. Use T = pair of value and index to get index from queries.\\
 All ranges are \lstinline{(lo, hi]} (hi is not included).
 \lstinline{fQuery} defines the function to be used for queries (currently min) and 
 \lstinline{fUpdate} defines the function to be used for updates (currently addition).
-\lstinputlisting[language=C++]{code/lazy_segtree.cpp}
+\lstinputlisting[language=cpp]{code/lazy_segtree.cpp}
 
 \subsection*{Treap}
-\lstinputlisting[language=C++]{code/treap.cpp}
+\lstinputlisting[language=cpp]{code/treap.cpp}
 
 \subsection*{Line Container}
 Container where you can add lines of the form $kx + m$, and query maximum values at points $x$.
 All operations are $\mathcal{O}(\log(n))$. For doubles, use \lstinline{inf = 1/.0} and \lstinline{div(a,b) = a/b}
-\lstinputlisting[language=C++]{code/line_container.cpp}
+\lstinputlisting[language=cpp]{code/line_container.cpp}
 
 \newpage
+
+\subsection*{Heavy-Light Decomposition}
+Constructs a heavy-light decomposition of a tree and generates array indices for nodes that can be used in range queries.
+
+For node \lstinline{i}, \lstinline{arridx[i]} is the array index for range queries (in the range $(0,n]$), 
+\lstinline{hchild[i]} is the heavy child (or $-1$ for leaf nodes), and
+\lstinline{hpLeaf[i]} and \lstinline{hpRoot[i]} are the leaf and root nodes respectively of the heavy path passing through node \lstinline{i}.
+
+\lstinline{lca(a, b)} returns the lca of a and b (in $\mathcal{O}(\log(n))$).
+If \lstinline{intv} is not null, \lstinline{*intv} will receive up to
+$2\log_2(n)$ intervals such that for all nodes \lstinline{x} on the path between \lstinline{a} and \lstinline{b},
+there is exactly one \lstinline{i} where \lstinline{intv[i].first <= arridx[x] < intv[i].second}.\\
+If \lstinline{intvIncludeLCA} is false, the lca of a and b will not be included in these intervals.
+
+\lstinputlisting[language=cpp]{code/hld.cpp}
 
 \subsection*{Link Cut Tree}
 Represents a forest of unrooted trees. You can add and remove edges (as long as the result is still a forest), and check whether two nodes are in the same tree.
 All operations are amortized $\mathcal{O}(\log(n))$.
-\lstinputlisting[language=C++]{code/link_cut_tree.cpp}
+\lstinputlisting[language=cpp]{code/link_cut_tree.cpp}
 
 \section*{Graph Algorithms}
 %\subsection*{Dijkstra's Algorithm}
-%\lstinputlisting[language=C++]{code/dijkstra.cpp}
+%\lstinputlisting[language=cpp]{code/dijkstra.cpp}
 
 \subsection*{Maximum Flow (Dinic's Algorithm)}
 
@@ -254,7 +274,7 @@ To obtain the actual flow, look at positive values of \lstinline{Edge::cap} only
 Time complexity: $\mathcal{O}(VE\log U)$ where $U = \max |\text{cap}|$.
 $\mathcal{O}(\min(E^{1/2}, V^{2/3})E)$ if $U = 1$.
 $\mathcal{O}(\sqrt{V}E)$ for bipartite matching.
-\lstinputlisting[language=C++]{code/max_flow.cpp}
+\lstinputlisting[language=cpp]{code/max_flow.cpp}
 
 
 \subsection*{Bellman Ford}
@@ -263,7 +283,7 @@ Calculates shortest paths from $s$ in a graph that might have negative edge weig
 Unreachable nodes get \lstinline{dist = inf}; nodes reachable through negative-weight cycles get \lstinline{dist = -inf}.
 Assumes $V^2 \max |w_i| < 2^{63}$. Time complexity: $\mathcal{O}(VE)$
 
-\lstinputlisting[language=C++]{code/bellman_ford.cpp}
+\lstinputlisting[language=cpp]{code/bellman_ford.cpp}
 
 
 \subsection*{Floyd Warshall}
@@ -272,7 +292,7 @@ As output, \lstinline{m[i][j]} is set to the shortest distance between $i$ and $
 \lstinline{inf} if no path, or \lstinline{-inf} if the path goes through a negative-weight cycle.
 Time complexity: $\mathcal{O}(N^3)$.
 \lstinputlisting[language=python]{code/floyd_warshall.py}
-\lstinputlisting[language=C++]{code/floyd_warshall.cpp}
+\lstinputlisting[language=cpp]{code/floyd_warshall.cpp}
 
 
 
@@ -281,7 +301,7 @@ Time complexity: $\mathcal{O}(N^3)$.
 Finds all biconnected components in an undirected graph, and returns a list of edges in each. Time complexity: $\mathcal{O}(E + V)$.
 Note that a node can be in several components, and bridges are by default returned as a single-edge biconnected component.
 
-\lstinputlisting[language=C++]{code/biconnected_components.cpp}
+\lstinputlisting[language=cpp]{code/biconnected_components.cpp}
 
 
 
@@ -294,7 +314,7 @@ index of a node (a component only has edges to components with
 lower index). \texttt{ncomps} will contain the number of components.
 Time complexity: $\mathcal{O}(E + V)$
 
-\lstinputlisting[language=C++]{code/scc.cpp}
+\lstinputlisting[language=cpp]{code/scc.cpp}
 
 \subsection*{2-SAT}
 
@@ -302,10 +322,10 @@ Calculates a valid assignment to boolean variables in a 2-SAT problem.
 Negated variables are represented by bit-inversions (\lstinline{~x}).
 Time complexity: $\mathcal{O}(N+E)$, where $N$ is the number of boolean variables, and $E$ is the number of clauses.
 
-\lstinputlisting[language=C++]{code/2sat.cpp}
+\lstinputlisting[language=cpp]{code/2sat.cpp}
 
 Usage example:
-\begin{lstlisting}[language=C++]
+\begin{lstlisting}[language=cpp]
 TwoSat ts(number of boolean variables);
 ts.either(0, ~3); // Var 0 is true or var 3 is false
 ts.set_value(2); // Var 2 is true
@@ -320,7 +340,7 @@ ts.solve(); // Returns true iff it is solvable. ts.values holds the assigned val
 Calculates min-cost max-flow. \lstinline{cap[i][j]!=cap[j][i]} is allowed; double edges are not. To obtain the actual flow, look at positive values only. Time complexity: $\mathcal{O}(E^2)$.
 If costs can be negative, call \lstinline{setpi} before \lstinline{maxflow}. Negative cost cycles are not supported.
 
-\lstinputlisting[language=C++]{code/min_cost_max_flow.cpp}
+\lstinputlisting[language=cpp]{code/min_cost_max_flow.cpp}
 
 \subsection*{Weighted Bipartite Matching}
 
@@ -330,21 +350,21 @@ are in two matchings and the sum of the edge weights is minimal.
 Takes cost[N][M], where cost[i][j] = cost for L[i] to be matched with R[j] and returns (min cost, match), where L[i] is matched with R[match[i]]. Negate costs for max cost. Requires $N \le M$.
 Time complexity: $\mathcal{O}(N^2 M)$
 
-\lstinputlisting[language=C++]{code/weighted_matching.cpp}
+\lstinputlisting[language=cpp]{code/weighted_matching.cpp}
 
 \vspace*{2cm}
 
 \section*{Math}
 
 \subsection*{Fast Modudo Operations}
-\lstinputlisting[language=C++]{code/modmul.cpp}
+\lstinputlisting[language=cpp]{code/modmul.cpp}
 
 \newpage
 
 \subsection*{Is Prime (Miller-Rabin)}
 Guaranteed to work for numbers up to $7 \cdot 10^{18}$. For larger numbers, use Python and extend A randomly.
 \begin{multicols}{2}
-  \lstinputlisting[language=C++]{code/is_prime.cpp}
+  \lstinputlisting[language=cpp]{code/is_prime.cpp}
   \columnbreak
   \lstinputlisting[language=python]{code/is_prime.py}
 \end{multicols}
@@ -352,7 +372,7 @@ Guaranteed to work for numbers up to $7 \cdot 10^{18}$. For larger numbers, use 
 \subsection*{Prime Factorization (Pollard-rho)}
 Returns prime factors of a number, in arbitrary order.
 \begin{multicols}{2}
-  \lstinputlisting[language=C++]{code/prime_factorize.cpp}
+  \lstinputlisting[language=cpp]{code/prime_factorize.cpp}
   \columnbreak
   \lstinputlisting[language=python]{code/prime_factorize.py}
 \end{multicols}
@@ -361,7 +381,7 @@ Returns prime factors of a number, in arbitrary order.
 Finds the Greatest Common Divisor to the integers $a$ and $b$. Also finds two integers $x$ and $y$, such that $ax+by=\gcd(a,b)$.
 Returns a tuple of $(\gcd(a, b), x, y)$. If $a$ and $b$ are coprime, then $x$ is the inverse of $a \pmod{b}$.
 \begin{multicols}{2}
-  \lstinputlisting[language=C++]{code/euclid.cpp}
+  \lstinputlisting[language=cpp]{code/euclid.cpp}
   \columnbreak
   \lstinputlisting[language=python]{code/euclid.py}
 \end{multicols}
@@ -370,19 +390,19 @@ Returns a tuple of $(\gcd(a, b), x, y)$. If $a$ and $b$ are coprime, then $x$ is
 Finds the smallest number $x$ satisfying a system of congruences, each in the form $x \equiv r_i \pmod{m_i}$.
 All pairs of $m_i$ must be coprime. \lstinline{eq} is a list of tuples describing the equations, the $i$:th of which should be $(r_i, m_i)$.
 \begin{multicols}{2}
-  \lstinputlisting[language=C++]{code/crt.cpp}
+  \lstinputlisting[language=cpp]{code/crt.cpp}
   \columnbreak
   \lstinputlisting[language=python]{code/crt.py}
 \end{multicols}
 
 \subsection*{Fraction Binary Search}
 Given $f$ and $N$, finds the smallest fraction $p/q \in [0, 1]$ such that $f(p/q)$ is true, and $p, q \le N$.
-\lstinputlisting[language=C++]{code/fraction_binary_search.cpp}
+\lstinputlisting[language=cpp]{code/fraction_binary_search.cpp}
 
 \subsection*{Solve Linear System of Equations}
 Solves $A x = b$. If there are multiple solutions, an arbitrary one is returned.
 Returns rank, or $-1$ if no solutions. Time complexity: $\mathcal{O}(n^2 m)$
-\lstinputlisting[language=C++]{code/solve_linear.cpp}
+\lstinputlisting[language=cpp]{code/solve_linear.cpp}
 
 \newpage
 
@@ -391,12 +411,12 @@ Returns rank, or $-1$ if no solutions. Time complexity: $\mathcal{O}(n^2 m)$
 
 \subsection*{Matrix Inverse}
 Invert matrix $A$. Returns rank; result is stored in $A$ unless singular (rank < n). Time complexity: $\mathcal{O}(n^3)$
-\lstinputlisting[language=C++]{code/matrix_invert.cpp}
+\lstinputlisting[language=cpp]{code/matrix_invert.cpp}
 
 \subsection*{Polynomial Roots}
 Finds the real roots of a polynomial. Time complexity: $\mathcal{O}(n^2 \log(1/\epsilon))$.\\
-Usage (solves $x^2-3x+2 = 0$): \lstinline[language=C++]|poly_roots({{ 2, -3, 1 }},-1e9,1e9)|
-\lstinputlisting[language=C++]{code/poly_roots.cpp}
+Usage (solves $x^2-3x+2 = 0$): \lstinline[language=cpp]|poly_roots({{ 2, -3, 1 }},-1e9,1e9)|
+\lstinputlisting[language=cpp]{code/poly_roots.cpp}
 
 \vspace*{-0.3cm}
 
@@ -408,7 +428,7 @@ Rounding is safe if $(\sum a_i^2 + \sum b_i^2)\log_2{N} < 9\cdot10^{14}$
 (in practice $10^{16}$; higher for random inputs).
 
 Time complexity: $\mathcal{O}(N \log N)$ with $N = |A|+|B|$ (about $1s$ for $N=4 \cdot 10^6$)
-\lstinputlisting[language=C++]{code/fft.cpp}
+\lstinputlisting[language=cpp]{code/fft.cpp}
 
 \newpage
 
@@ -417,7 +437,7 @@ Time complexity: $\mathcal{O}(N \log N)$ with $N = |A|+|B|$ (about $1s$ for $N=4
 
 For conv, M should be of the form $2^a b+1$, and the convolution result should have size at most $2^a$. Inputs must be in $[0,M)$.
 
-\lstinputlisting[language=C++]{code/fft_mod.cpp}
+\lstinputlisting[language=cpp]{code/fft_mod.cpp}
 
 
 \end{document}

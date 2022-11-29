@@ -36,12 +36,12 @@ struct TwoSat {
 				return 0;
 		return 1;
 	}
-	/* optional */ int add_var() {
+	int add_var() { //optional
 		gr.emplace_back();
 		gr.emplace_back();
 		return N++;
 	}
-	/* optional */ void at_most_one(const vector<int>& li) {
+	void at_most_one(const vector<int>& li) { //optional
 		if (li.size() <= 1) return;
 		int cur = ~li[0];
 		for(size_t i = 2; i < li.size(); i++) {
