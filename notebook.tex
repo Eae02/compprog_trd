@@ -263,12 +263,12 @@ such that there exists an interval \lstinline{i} $\in$ \lstinline{*intv} where \
 If \lstinline{intvIncludeLCA} is false, the lca of a and b will not be included in these intervals.
 \lstinputlisting[language=cpp]{code/heavy_light_decomposition.cpp}
 
-\pagebreak
-
 \subsection*{Link Cut Tree}
 Represents a forest of unrooted trees. You can add and remove edges (as long as the result is still a forest), and check whether two nodes are in the same tree.
 All operations are amortized $\mathcal{O}(\log(n))$.
+\begin{multicols}{2}
 \lstinputlisting[language=cpp]{code/link_cut_tree.cpp}
+\end{multicols}
 
 \section*{Graph Algorithms}
 %\subsection*{Dijkstra's Algorithm}
@@ -329,19 +329,17 @@ Time complexity: $\mathcal{O}(E + V)$
 Calculates a valid assignment to boolean variables in a 2-SAT problem.
 Negated variables are represented by bit-inversions (\lstinline{~x}).
 Time complexity: $\mathcal{O}(N+E)$, where $N$ is the number of boolean variables, and $E$ is the number of clauses.
-
+\begin{multicols}{2}
 \lstinputlisting[language=cpp]{code/2sat.cpp}
-
-Usage example:
+Usage:
 \begin{lstlisting}[language=cpp]
 TwoSat ts(number of boolean variables);
 ts.either(0, ~3); // Var 0 is true or var 3 is false
 ts.set_value(2); // Var 2 is true
 ts.at_most_one({0,~1,2}); // <= 1 of vars 0, ~1 and 2 are true
-ts.solve(); // Returns true iff it is solvable. ts.values holds the assigned values to the variables
+ts.solve(); // Returns true iff it is solvable. ts.values holds the variables' values
 \end{lstlisting}
-
-\pagebreak
+\end{multicols}
 
 \subsection*{Minimum Cost Maximum Flow}
 
@@ -412,19 +410,19 @@ Solves $A x = b$. If there are multiple solutions, an arbitrary one is returned.
 Returns rank, or $-1$ if no solutions. Time complexity: $\mathcal{O}(n^2 m)$
 \lstinputlisting[language=cpp]{code/solve_linear.cpp}
 
-\newpage
-
 \subsection*{Matrix Multiplication}
 \lstinputlisting[language=python]{code/matrix_mul.py}
 
+\begin{multicols}{2}
+\subsection*{Polynomial Roots}
+Finds the real roots of a polynomial. Time complexity: $\mathcal{O}(n^2 \log(1/\epsilon))$.
+Usage (solves $x^2-3x+2 = 0$): \lstinline[language=cpp]|poly_roots({{ 2, -3, 1 }},-1e9,1e9)|
+\lstinputlisting[language=cpp]{code/poly_roots.cpp}
+\columnbreak
 \subsection*{Matrix Inverse}
 Invert matrix $A$. Returns rank; result is stored in $A$ unless singular (rank < n). Time complexity: $\mathcal{O}(n^3)$
 \lstinputlisting[language=cpp]{code/matrix_invert.cpp}
-
-\subsection*{Polynomial Roots}
-Finds the real roots of a polynomial. Time complexity: $\mathcal{O}(n^2 \log(1/\epsilon))$.\\
-Usage (solves $x^2-3x+2 = 0$): \lstinline[language=cpp]|poly_roots({{ 2, -3, 1 }},-1e9,1e9)|
-\lstinputlisting[language=cpp]{code/poly_roots.cpp}
+\end{multicols}
 
 \vspace*{-0.3cm}
 
