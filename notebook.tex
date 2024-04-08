@@ -450,5 +450,48 @@ For conv, M should be of the form $2^a b+1$, and the convolution result should h
 
 \lstinputlisting[language=cpp]{code/fft_mod.cpp}
 
+\subsection*{Simplex}
+Solves a general linear maximization problem: maximize $c^T x$ subject to $Ax \le b$, $x \ge 0$.
+
+Returns -inf if there is no solution, inf if there are arbitrarily good solutions, or the maximum value of $c^T x$ otherwise.
+
+The input vector is set to an optimal $x$ (or in the unbounded case, an arbitrary solution fulfilling the constraints).
+
+Numerical stability is not guaranteed. For better performance, define variables such that $x = 0$ is viable.
+
+ \text{vvd A = \{\{1,-1\}, \{-1,1\}, \{-1,-2\}\};}
+ \text{vd b = \{1,1,-4\}, c = \{-1,-1\}, x;}
+ T val = LPSolver(A, b, c).solve(x);
+ 
+ $O(NM * \#pivots)$, where a pivot may be e.g. an edge relaxation. $O(2^n)$ in the general case.
+
+\lstinputlisting[language=cpp]{code/simplex.cpp}
+
+\subsection*{Spherical Distance}
+\begin{multicols}{2}\lstinputlisting[language=cpp]{code/spherical_distance.cpp}
+  \columnbreak
+  Returns the shortest distance on the sphere with radius radius between the points
+ with azimuthal angles (longitude) f1 ($\phi_1$) and f2 ($\phi_2$) from x axis and zenith angles
+ (latitude) t1 ($\theta_1$) and t2 ($\theta_2$) from z axis (0 = north pole). All angles measured
+ in radians. The algorithm starts by converting the spherical coordinates to cartesian coordinates
+ so if that is what you have you can use only the two last rows. dx*radius is then the difference
+ between the two points in the x direction and d*radius is the total distance between the points.
+
+\end{multicols}
+
+
+\vspace*{2cm}
+
+\section*{Strings}
+\subsection*{Manacher}
+
+For each position in a string, computes p[0][i] = half length of
+longest even palindrome around pos i, p[1][i] = longest odd (half rounded down).
+Time: O(N)
+\begin{multicols}{2}\lstinputlisting[language=cpp]{code/manacher.cpp}
+  \columnbreak
+
+\end{multicols}
+
 
 \end{document}
