@@ -65,9 +65,6 @@
 \subsection*{Compilation Script}
 \lstinputlisting[language=bash]{scripts/compile.sh}
 
-\subsection*{Polynomial Hash}
-\lstinputlisting[language=cpp]{code/poly_hash.cpp}
-
 \subsection*{Binary Search}
 \lstinputlisting[language=cpp]{code/binary_search.cpp}
 
@@ -148,6 +145,16 @@ Returns twice the signed area of a polygon. Clockwise enumeration gives negative
   \columnbreak
   \lstinputlisting[language=python]{code/geometry_py/polygon_area.py}
 \end{multicols}
+
+\subsection*{Area of union of polygons}
+Calculates the area of the union of multiple polygons (not necessarily convex).
+The points within each polygon must be given in CCW order.
+Time complexity: $\mathcal{O}(n^2)$, where $N$ is the total number of points.
+\lstinputlisting[language=cpp]{code/geometry_cpp/polygon_union.cpp}
+
+\subsection*{Angle struct}
+Struct for representing angles using integer points and sorting them.
+\lstinputlisting[language=cpp]{code/geometry_cpp/angle.cpp}
 
 \pagebreak
 
@@ -254,12 +261,12 @@ such that there exists an interval \lstinline{i} $\in$ \lstinline{*intv} where \
 If \lstinline{intvIncludeLCA} is false, the lca of a and b will not be included in these intervals.
 \lstinputlisting[language=cpp]{code/heavy_light_decomposition.cpp}
 
-\pagebreak
-
 \subsection*{Link Cut Tree}
 Represents a forest of unrooted trees. You can add and remove edges (as long as the result is still a forest), and check whether two nodes are in the same tree.
 All operations are amortized $\mathcal{O}(\log(n))$.
+\begin{multicols}{2}
 \lstinputlisting[language=cpp]{code/link_cut_tree.cpp}
+\end{multicols}
 
 \section*{Graph Algorithms}
 %\subsection*{Dijkstra's Algorithm}
@@ -320,19 +327,17 @@ Time complexity: $\mathcal{O}(E + V)$
 Calculates a valid assignment to boolean variables in a 2-SAT problem.
 Negated variables are represented by bit-inversions (\lstinline{~x}).
 Time complexity: $\mathcal{O}(N+E)$, where $N$ is the number of boolean variables, and $E$ is the number of clauses.
-
+\begin{multicols}{2}
 \lstinputlisting[language=cpp]{code/2sat.cpp}
-
-Usage example:
+Usage:
 \begin{lstlisting}[language=cpp]
 TwoSat ts(number of boolean variables);
 ts.either(0, ~3); // Var 0 is true or var 3 is false
 ts.set_value(2); // Var 2 is true
 ts.at_most_one({0,~1,2}); // <= 1 of vars 0, ~1 and 2 are true
-ts.solve(); // Returns true iff it is solvable. ts.values holds the assigned values to the variables
+ts.solve(); // Returns true iff it is solvable. ts.values holds the variables' values
 \end{lstlisting}
-
-\pagebreak
+\end{multicols}
 
 \subsection*{Minimum Cost Maximum Flow}
 
@@ -403,19 +408,19 @@ Solves $A x = b$. If there are multiple solutions, an arbitrary one is returned.
 Returns rank, or $-1$ if no solutions. Time complexity: $\mathcal{O}(n^2 m)$
 \lstinputlisting[language=cpp]{code/solve_linear.cpp}
 
-\newpage
-
 \subsection*{Matrix Multiplication}
 \lstinputlisting[language=python]{code/matrix_mul.py}
 
+\begin{multicols}{2}
+\subsection*{Polynomial Roots}
+Finds the real roots of a polynomial. Time complexity: $\mathcal{O}(n^2 \log(1/\epsilon))$.
+Usage (solves $x^2-3x+2 = 0$): \lstinline[language=cpp]|poly_roots({{ 2, -3, 1 }},-1e9,1e9)|
+\lstinputlisting[language=cpp]{code/poly_roots.cpp}
+\columnbreak
 \subsection*{Matrix Inverse}
 Invert matrix $A$. Returns rank; result is stored in $A$ unless singular (rank < n). Time complexity: $\mathcal{O}(n^3)$
 \lstinputlisting[language=cpp]{code/matrix_invert.cpp}
-
-\subsection*{Polynomial Roots}
-Finds the real roots of a polynomial. Time complexity: $\mathcal{O}(n^2 \log(1/\epsilon))$.\\
-Usage (solves $x^2-3x+2 = 0$): \lstinline[language=cpp]|poly_roots({{ 2, -3, 1 }},-1e9,1e9)|
-\lstinputlisting[language=cpp]{code/poly_roots.cpp}
+\end{multicols}
 
 \vspace*{-0.3cm}
 
@@ -437,6 +442,55 @@ Time complexity: $\mathcal{O}(N \log N)$ with $N = |A|+|B|$ (about $1s$ for $N=4
 For conv, M should be of the form $2^a b+1$, and the convolution result should have size at most $2^a$. Inputs must be in $[0,M)$.
 
 \lstinputlisting[language=cpp]{code/fft_mod.cpp}
+
+\subsection*{Simplex}
+Solves a general linear maximization problem: maximize $c^T x$ subject to $Ax \le b$, $x \ge 0$.
+
+Returns -inf if there is no solution, inf if there are arbitrarily good solutions, or the maximum value of $c^T x$ otherwise.
+
+The input vector is set to an optimal $x$ (or in the unbounded case, an arbitrary solution fulfilling the constraints).
+
+Numerical stability is not guaranteed. For better performance, define variables such that $x = 0$ is viable.
+
+ \text{vvd A = \{\{1,-1\}, \{-1,1\}, \{-1,-2\}\};}
+ \text{vd b = \{1,1,-4\}, c = \{-1,-1\}, x;}
+ T val = LPSolver(A, b, c).solve(x);
+ 
+ $O(NM * \#pivots)$, where a pivot may be e.g. an edge relaxation. $O(2^n)$ in the general case.
+
+\lstinputlisting[language=cpp]{code/simplex.cpp}
+
+\subsection*{Spherical Distance}
+\begin{multicols}{2}\lstinputlisting[language=cpp]{code/spherical_distance.cpp}
+  \columnbreak
+  Returns the shortest distance on the sphere with radius radius between the points
+ with azimuthal angles (longitude) f1 ($\phi_1$) and f2 ($\phi_2$) from x axis and zenith angles
+ (latitude) t1 ($\theta_1$) and t2 ($\theta_2$) from z axis (0 = north pole). All angles measured
+ in radians. The algorithm starts by converting the spherical coordinates to cartesian coordinates
+ so if that is what you have you can use only the two last rows. dx*radius is then the difference
+ between the two points in the x direction and d*radius is the total distance between the points.
+
+\end{multicols}
+
+
+\vspace*{2cm}
+
+\section*{Strings}
+
+
+\begin{multicols}{2}
+
+\subsection*{Manacher}
+  For each position in a string, computes p[0][i] = half length of
+longest even palindrome around pos i, p[1][i] = longest odd (half rounded down).
+Time: O(N)
+  \lstinputlisting[language=cpp]{code/manacher.cpp}
+  \columnbreak
+
+
+  \subsection*{Polynomial Hash}
+  \lstinputlisting[language=cpp]{code/poly_hash.cpp}
+\end{multicols}
 
 
 \subsection*{Estimates}

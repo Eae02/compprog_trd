@@ -19,6 +19,7 @@ int solveLinear(vector<vector<double>> A, vector<double> b, vector<double>& x) {
 		for(int j = 0; j < n; j++)
 			swap(A[j][i], A[j][bc]);
 		bv = 1 / A[i][i];
+		// for all solutions do: for (ll j = 0; j < n; j++) { if (j != i) continue;
 		for(int j = i + 1; j < n; j++) {
 			double fac = A[j][i] * bv;
 			b[j] -= fac * b[i];
@@ -27,6 +28,14 @@ int solveLinear(vector<vector<double>> A, vector<double> b, vector<double>& x) {
 		}
 		rank++;
 	}
+	// for all solutions do:
+	// x.assign(m, undefined);
+	// for(int i = 0; i < rank; i++) {
+	//     for (int j = rank; j < m; j++)
+	//         if (fabs(A[i][j]) > eps) goto fail;
+	//     x[col[i]] = b[i] / A[i][i];
+	//     fail:;
+	// }
 	x.assign(m, 0);
 	for (int i = rank; i--;) {
 		b[i] /= A[i][i];
