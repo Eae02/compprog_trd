@@ -67,9 +67,6 @@
 \subsection*{Compilation Script}
 \lstinputlisting[language=bash]{scripts/compile.sh}
 
-\subsection*{Polynomial Hash}
-\lstinputlisting[language=cpp]{code/poly_hash.cpp}
-
 \subsection*{Binary Search}
 \lstinputlisting[language=cpp]{code/binary_search.cpp}
 
@@ -483,14 +480,20 @@ Numerical stability is not guaranteed. For better performance, define variables 
 \vspace*{2cm}
 
 \section*{Strings}
-\subsection*{Manacher}
 
-For each position in a string, computes p[0][i] = half length of
+
+\begin{multicols}{2}
+
+\subsection*{Manacher}
+  For each position in a string, computes p[0][i] = half length of
 longest even palindrome around pos i, p[1][i] = longest odd (half rounded down).
 Time: O(N)
-\begin{multicols}{2}\lstinputlisting[language=cpp]{code/manacher.cpp}
+  \lstinputlisting[language=cpp]{code/manacher.cpp}
   \columnbreak
 
+
+  \subsection*{Polynomial Hash}
+  \lstinputlisting[language=cpp]{code/poly_hash.cpp}
 \end{multicols}
 
 
