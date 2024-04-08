@@ -151,6 +151,16 @@ Returns twice the signed area of a polygon. Clockwise enumeration gives negative
   \lstinputlisting[language=python]{code/geometry_py/polygon_area.py}
 \end{multicols}
 
+\subsection*{Area of union of polygons}
+Calculates the area of the union of multiple polygons (not necessarily convex).
+The points within each polygon must be given in CCW order.
+Time complexity: $\mathcal{O}(n^2)$, where $N$ is the total number of points.
+\lstinputlisting[language=cpp]{code/geometry_cpp/polygon_union.cpp}
+
+\subsection*{Angle struct}
+Struct for representing angles using integer points and sorting them.
+\lstinputlisting[language=cpp]{code/geometry_cpp/angle.cpp}
+
 \pagebreak
 
 \subsection*{Point inside polygon}
