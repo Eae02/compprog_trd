@@ -492,6 +492,28 @@ Time: O(N)
   \lstinputlisting[language=cpp]{code/poly_hash.cpp}
 \end{multicols}
 
+\subsection*{Aho Corasick}
+Aho-Corasick automaton, used for multiple pattern matching.
+\\Initialize with AhoCorasick ac(patterns); the automaton start node will be at index 0.
+\\find(word) returns for each position the index of the longest word that ends there, or -1 if none.
+\\findAll($-$, word) finds all words (up to $N \sqrt N$ many if no duplicate patterns)
+\\that start at each position (shortest first).
+\\Duplicate patterns are allowed; empty patterns are not.
+\\To find the longest words that start at each position, reverse all input.
+\\For large alphabets, split each symbol into chunks, with sentinel bits for symbol boundaries.
+\\Time: construction takes $O(26N)$, where $N =$ sum of length of patterns.
+\\find(x) is $O(N)$, where N = length of x. findAll is $O(NM)$.
+  \lstinputlisting[language=cpp]{code/aho_corasick.cpp}
+
+  \subsection*{Suffix tree}
+  Ukkonen's algorithm for online suffix tree construction.
+\\Each node contains indices [l, r) into the string, and a list of child nodes.
+\\Suffixes are given by traversals of this tree, joining [l, r) substrings.
+\\The root is 0 (has l = -1, r = 0), non-existent children are -1.
+\\To get a complete tree, append a dummy symbol -- otherwise it may contain
+\\an incomplete path (still useful for substring matching, though).
+    \lstinputlisting[language=cpp]{code/suffix_tree.cpp}
+
 
 \subsection*{Estimates}
 

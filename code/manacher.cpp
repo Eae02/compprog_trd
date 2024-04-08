@@ -5,9 +5,7 @@
  *  longest even palindrome around pos i, p[1][i] = longest odd (half rounded down).
  * Time: O(N)
  * Status: Stress-tested
- */
-#include "common.hpp"
-#define rep(i, a, b) for(int i = a; i < (b); ++i)
+ */#define rep(i, a, b) for(int i = a; i < (b); ++i)
 array<vector<int>, 2> manacher(const string& s) {
 	int n = s.size();
 	array<vector<int>,2> p = {vector<int>(n+1), vector<int>(n)};
