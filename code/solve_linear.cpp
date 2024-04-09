@@ -5,9 +5,10 @@ int solveLinear(vector<vector<double>> A, vector<double> b, vector<double>& x) {
 	vector<int> col(m); iota(all(col), 0);
 	for(int i = 0; i < n; i++) {
 		double v, bv = 0;
-		for(int r = i; r < n; ++r) for(int c = i; c < m; c++)
-			if ((v = fabs(A[r][c])) > bv)
-				br = r, bc = c, bv = v;
+		for(int r = i; r < n; ++r)
+			for(int c = i; c < m; c++)
+				if ((v = fabs(A[r][c])) > bv)
+					br = r, bc = c, bv = v;
 		if (bv <= eps) {
 			for(int j = i; j < n; j++)
 				if (fabs(b[j]) > eps) return -1;

@@ -57,6 +57,16 @@
 
 \begin{document}
 
+\begin{titlepage}
+  \centering
+  \topskip0pt
+  \vspace*{\fill}
+  {\scshape\Huge EZCP \par}
+  \vspace{1cm}
+  {\LARGE\color{black!75} Lund University \par}
+  \vspace*{\fill}
+\end{titlepage}
+
 \section*{Misc}
 
 \subsection*{Template}
@@ -107,7 +117,7 @@ Returns the distance from the point p to the line segment starting at s and endi
   \lstinputlisting[language=python]{code/geometry_py/dist_ps.py}
 \end{multicols}
 
-\vspace*{-0.3cm}
+\vspace*{-0.5cm}
 
 \subsection*{Distance between point and line}
 Returns the signed distance from the point p to the line passing through the points a and b.
@@ -116,17 +126,6 @@ Returns the signed distance from the point p to the line passing through the poi
   \columnbreak
   \lstinputlisting[language=python]{code/geometry_py/dist_pl.py}
 \end{multicols}
-
-\subsection*{Project point to line (or reflect)}
-Projects the point p onto the line passing through a and b.
-Set \lstinline{refl=True} to get reflection of point p across the line instead.
-\begin{multicols}{2}
-  \lstinputlisting[language=cpp]{code/geometry_cpp/proj_pl.cpp}
-  \columnbreak
-  \lstinputlisting[language=python]{code/geometry_py/proj_pl.py}
-\end{multicols}
-
-\pagebreak
 
 \subsection*{Intersection between two lines}
 If a unique intersection point of the lines going through \lstinline{s1,e1} and \lstinline{s2,e2} exists \lstinline{(1,point)} is returned.\\
@@ -156,6 +155,15 @@ Returns twice the signed area of a polygon. Clockwise enumeration gives negative
   \lstinputlisting[language=python]{code/geometry_py/polygon_area.py}
 \end{multicols}
 
+\subsection*{Project point to line (or reflect)}
+Projects the point p onto the line passing through a and b.
+Set \lstinline{refl=True} to get reflection of point p across the line instead.
+\begin{multicols}{2}
+  \lstinputlisting[language=cpp]{code/geometry_cpp/proj_pl.cpp}
+  \columnbreak
+  \lstinputlisting[language=python]{code/geometry_py/proj_pl.py}
+\end{multicols}
+
 \subsection*{Point inside polygon}
 Returns true if the point \lstinline{pt} lies within the polygon \lstinline{poly}.
 If strict is true, returns false for points on the boundary.
@@ -165,15 +173,15 @@ If strict is true, returns false for points on the boundary.
 \lstinputlisting[language=cpp]{code/geometry_cpp/point_in_polygon.cpp}
 \end{multicols}
 
-\subsection*{Area of union of polygons}
-Calculates the area of the union of multiple polygons (not necessarily convex).
-The points within each polygon must be given in CCW order.
-Time complexity: $\mathcal{O}(n^2)$, where $N$ is the total number of points.
-\lstinputlisting[language=cpp]{code/geometry_cpp/polygon_union.cpp}
+\vspace*{-1cm}
 
-\subsection*{Angle struct}
-Struct for representing angles using integer points and sorting them.
-\lstinputlisting[language=cpp]{code/geometry_cpp/angle.cpp}
+\subsection*{Circumcircle}
+Returns a circle from three points.
+\begin{multicols}{2}
+  \lstinputlisting[language=cpp]{code/geometry_cpp/circumcircle.cpp}
+  \columnbreak
+  \lstinputlisting[language=python]{code/geometry_py/circumcircle.py}
+\end{multicols}
 
 \subsection*{Intersection between two circles}
 Computes the pair of points at which two circles intersect. Returns \lstinline{None} in case of no intersection.
@@ -191,19 +199,6 @@ Computes the intersection between a circle and a line. Returns a list of either 
   \lstinputlisting[language=python]{code/geometry_py/intersect_cl.py}
 \end{multicols}
 
-\subsection*{Circumcircle}
-Returns a circle from three points.
-\begin{multicols}{2}
-  \lstinputlisting[language=cpp]{code/geometry_cpp/circumcircle.cpp}
-  \columnbreak
-  \lstinputlisting[language=python]{code/geometry_py/circumcircle.py}
-\end{multicols}
-
-\subsection*{Circle-polygon area}
-Returns the area of the intersection of a circle with a counter-clockwise polygon.
-Time complexity: $\mathcal{O}(n)$
-\lstinputlisting[language=cpp]{code/geometry_cpp/circle_poly_area.cpp}
-
 \subsection*{Circle tangents}
 Finds the external tangents of two circles, or internal if r2 is negated.\\
 Can return 0, 1, or 2 tangents -- 0 if one circle contains the other (or overlaps it, in the internal case, or if the circles are the same);
@@ -216,6 +211,11 @@ To find the tangents of a circle with a point set r2 to 0.
   \lstinputlisting[language=python]{code/geometry_py/circle_tangents.py}
 \end{multicols}
 
+\subsection*{Circle-polygon area}
+Returns the area of the intersection of a circle with a counter-clockwise polygon.
+Time complexity: $\mathcal{O}(n)$
+\lstinputlisting[language=cpp]{code/geometry_cpp/circle_poly_area.cpp}
+
 \subsection*{Convex hull}
 Returns a list of points on the convex hull in counter-clockwise order.
 Points on the edge of the hull between two other points are not considered part of the hull.
@@ -226,12 +226,34 @@ Time complexity: $\mathcal{O}(n \log n)$
   \lstinputlisting[language=python]{code/geometry_py/convex_hull.py}
 \end{multicols}
 
+\subsection*{Area of union of polygons}
+Calculates the area of the union of multiple polygons (not necessarily convex).
+The points within each polygon must be given in CCW order.
+Time complexity: $\mathcal{O}(n^2)$, where $N$ is the total number of points.
+\lstinputlisting[language=cpp]{code/geometry_cpp/polygon_union.cpp}
+
+\subsection*{Angle struct}
+Struct for representing angles using integer points and sorting them.
+\lstinputlisting[language=cpp]{code/geometry_cpp/angle.cpp}
+
+\subsection*{Half-plane intersection}
+Computes the intersection of a set of half-planes, each on the form: $x P_x + y P_y \ge P_c$.
+
+The resulting polygon extending to infinity is not handled. If that is possible add some extra half-planes far away and check for those in the result.
+
+Each half-plane is given as a pair where the first value is $(P_x, P_y)$ and the second value is $P_c$.
+In the returned vector, ret[i].first is the position of the i:th vertex and ret[i].second is the index in the input vector of the half-plane that created the edge between vertex i and (i+1)\%ret.size().
+
+There may be duplicate points in the output vector if there are multiple half-planes that intersect at the same point.
+
+\lstinputlisting[language=cpp]{code/geometry_cpp/half_plane_intersection.cpp}
+
+\pagebreak
+
 \section*{Data Structures}
 
 \subsection*{Fenwick Tree}
 \lstinputlisting[language=cpp, aboveskip=0pt]{code/fenwick_tree.cpp}
-
-\pagebreak
 
 \subsection*{Segment Tree}
 \begin{multicols}{2}
@@ -244,6 +266,8 @@ Time complexity: $\mathcal{O}(n \log n)$
 
 \subsection*{Sparse Table}
 \lstinputlisting[language=cpp, aboveskip=0pt]{code/sparse_table.cpp}
+
+\pagebreak
 
 \subsection*{Line Container}
 Container where you can add lines of the form $kx + m$, and query maximum values at points $x$.
@@ -259,9 +283,6 @@ All ranges are \lstinline{(lo, hi]} (hi is not included).
 \lstinline{fUpdate} defines the function to be used for updates (currently addition).
 \lstinputlisting[language=cpp]{code/lazy_segtree.cpp}
 
-\subsection*{Treap}
-\lstinputlisting[language=cpp]{code/treap.cpp}
-
 \subsection*{Heavy-Light Decomposition}
 Constructs a heavy-light decomposition of a tree and generates indices for nodes that are consecutive within each heavy path.
 
@@ -276,6 +297,13 @@ such that there exists an interval \lstinline{i} $\in$ \lstinline{*intv} where \
 If \lstinline{intvIncludeLCA} is false, the lca of a and b will not be included in these intervals.
 \lstinputlisting[language=cpp]{code/heavy_light_decomposition.cpp}
 
+\pagebreak
+
+\subsection*{Treap}
+\begin{multicols}{2}
+\lstinputlisting[language=cpp]{code/treap.cpp}
+\end{multicols}
+
 \subsection*{Link Cut Tree}
 Represents a forest of unrooted trees. You can add and remove edges (as long as the result is still a forest), and check whether two nodes are in the same tree.
 All operations are amortized $\mathcal{O}(\log(n))$.
@@ -283,10 +311,8 @@ All operations are amortized $\mathcal{O}(\log(n))$.
 \lstinputlisting[language=cpp]{code/link_cut_tree.cpp}
 \end{multicols}
 
-\section*{Graph Algorithms}
-%\subsection*{Dijkstra's Algorithm}
-%\lstinputlisting[language=cpp]{code/dijkstra.cpp}
 
+\section*{Graph Algorithms}
 \subsection*{Maximum Flow (Dinic's Algorithm)}
 
 Constructor takes number of nodes, call \lstinline{addEdge} to add edges and \lstinline{calc} to find maximum flow.
@@ -303,8 +329,9 @@ $\mathcal{O}(\sqrt{V}E)$ for bipartite matching.
 Calculates shortest paths from $s$ in a graph that might have negative edge weights.
 Unreachable nodes get \lstinline{dist = inf}; nodes reachable through negative-weight cycles get \lstinline{dist = -inf}.
 Assumes $V^2 \max |w_i| < 2^{63}$. Time complexity: $\mathcal{O}(VE)$
-
+\begin{multicols}{2}
 \lstinputlisting[language=cpp]{code/bellman_ford.cpp}
+\end{multicols}
 
 
 \subsection*{Floyd Warshall}
@@ -315,27 +342,7 @@ Time complexity: $\mathcal{O}(N^3)$.
 \lstinputlisting[language=python]{code/floyd_warshall.py}
 \lstinputlisting[language=cpp]{code/floyd_warshall.cpp}
 
-
-
-\subsection*{Biconnected Components}
-
-Finds all biconnected components in an undirected graph, and returns a list of edges in each. Time complexity: $\mathcal{O}(E + V)$.
-Note that a node can be in several components, and bridges are by default returned as a single-edge biconnected component.
-
-\lstinputlisting[language=cpp]{code/biconnected_components.cpp}
-
-
-
-\subsection*{Strongly Connected Components}
-
-Finds strongly connected components in a directed graph.
-Usage: \lstinline|scc(graph, [&](vector<int>& v) { ... })}| visits all components
-in reverse topological order. \texttt{comp[i]} holds the component
-index of a node (a component only has edges to components with
-lower index). \texttt{ncomps} will contain the number of components.
-Time complexity: $\mathcal{O}(E + V)$
-
-\lstinputlisting[language=cpp]{code/scc.cpp}
+\pagebreak
 
 \subsection*{2-SAT}
 
@@ -354,12 +361,24 @@ ts.solve(); // Returns true iff it is solvable. ts.values holds the variables' v
 \end{lstlisting}
 \end{multicols}
 
-\subsection*{Minimum Cost Maximum Flow}
+\subsection*{Strongly Connected Components}
 
-Calculates min-cost max-flow. \lstinline{cap[i][j]!=cap[j][i]} is allowed; double edges are not. To obtain the actual flow, look at positive values only. Time complexity: $\mathcal{O}(E^2)$.
-If costs can be negative, call \lstinline{setpi} before \lstinline{maxflow}. Negative cost cycles are not supported.
+Finds strongly connected components in a directed graph.
+Usage: \lstinline|scc(graph, [&](vector<int>& v) { ... })}| visits all components
+in reverse topological order. \texttt{comp[i]} holds the component
+index of a node (a component only has edges to components with
+lower index). \texttt{ncomps} will contain the number of components.
+Time complexity: $\mathcal{O}(E + V)$
+\begin{multicols}{2}
+\lstinputlisting[language=cpp]{code/scc.cpp}
+\end{multicols}
 
-\lstinputlisting[language=cpp]{code/min_cost_max_flow.cpp}
+\subsection*{Biconnected Components}
+
+Finds all biconnected components in an undirected graph, and returns a list of edges in each. Time complexity: $\mathcal{O}(E + V)$.
+Note that a node can be in several components, and bridges are by default returned as a single-edge biconnected component.
+
+\lstinputlisting[language=cpp]{code/biconnected_components.cpp}
 
 \subsection*{Weighted Bipartite Matching}
 
@@ -371,14 +390,19 @@ Time complexity: $\mathcal{O}(N^2 M)$
 
 \lstinputlisting[language=cpp]{code/weighted_matching.cpp}
 
+\subsection*{Minimum Cost Maximum Flow}
+
+Calculates min-cost max-flow. \lstinline{cap[i][j]!=cap[j][i]} is allowed; double edges are not. To obtain the actual flow, look at positive values only. Time complexity: $\mathcal{O}(E^2)$.
+If costs can be negative, call \lstinline{setpi} before \lstinline{maxflow}. Negative cost cycles are not supported.
+
+\lstinputlisting[language=cpp]{code/min_cost_max_flow.cpp}
+
 \vspace*{2cm}
 
 \section*{Math}
 
 \subsection*{Fast Modudo Operations}
 \lstinputlisting[language=cpp]{code/modmul.cpp}
-
-\newpage
 
 \subsection*{Is Prime (Miller-Rabin)}
 Guaranteed to work for numbers up to $7 \cdot 10^{18}$. For larger numbers, use Python and extend A randomly.
@@ -414,30 +438,28 @@ All pairs of $m_i$ must be coprime. \lstinline{eq} is a list of tuples describin
   \lstinputlisting[language=python]{code/crt.py}
 \end{multicols}
 
-\subsection*{Fraction Binary Search}
-Given $f$ and $N$, finds the smallest fraction $p/q \in [0, 1]$ such that $f(p/q)$ is true, and $p, q \le N$.
-\lstinputlisting[language=cpp]{code/fraction_binary_search.cpp}
-
 \subsection*{Solve Linear System of Equations}
 Solves $A x = b$. If there are multiple solutions, an arbitrary one is returned.
 Returns rank, or $-1$ if no solutions. Time complexity: $\mathcal{O}(n^2 m)$
+\begin{multicols}{2}
 \lstinputlisting[language=cpp]{code/solve_linear.cpp}
+\end{multicols}
 
 \subsection*{Matrix Multiplication}
 \lstinputlisting[language=python]{code/matrix_mul.py}
 
-\begin{multicols}{2}
-\subsection*{Polynomial Roots}
-Finds the real roots of a polynomial. Time complexity: $\mathcal{O}(n^2 \log(1/\epsilon))$.
-Usage (solves $x^2-3x+2 = 0$): \lstinline[language=cpp]|poly_roots({{ 2, -3, 1 }},-1e9,1e9)|
-\lstinputlisting[language=cpp]{code/poly_roots.cpp}
-\columnbreak
-\subsection*{Matrix Inverse}
-Invert matrix $A$. Returns rank; result is stored in $A$ unless singular (rank < n). Time complexity: $\mathcal{O}(n^3)$
-\lstinputlisting[language=cpp]{code/matrix_invert.cpp}
-\end{multicols}
+\pagebreak
 
-\vspace*{-0.3cm}
+\subsection*{Spherical Distance}
+\begin{multicols}{2}\lstinputlisting[language=cpp]{code/spherical_distance.cpp}
+  \columnbreak
+  Returns the shortest distance on the sphere with radius radius between the points
+ with azimuthal angles (longitude) f1 ($\phi_1$) and f2 ($\phi_2$) from x axis and zenith angles
+ (latitude) t1 ($\theta_1$) and t2 ($\theta_2$) from z axis (0 = north pole). All angles measured
+ in radians. The algorithm starts by converting the spherical coordinates to cartesian coordinates
+ so if that is what you have you can use only the two last rows. dx*radius is then the difference
+ between the two points in the x direction and d*radius is the total distance between the points.
+\end{multicols}
 
 \subsection*{FFT}
 \lstinline{fft(a)} computes $\hat f(k) = \sum_x a[x] \exp(2\pi i \cdot k x / N)$ for all $k$.
@@ -458,6 +480,28 @@ For conv, M should be of the form $2^a b+1$, and the convolution result should h
 
 \lstinputlisting[language=cpp]{code/fft_mod.cpp}
 
+\vspace*{-0.3cm}
+
+\subsection*{Fraction Binary Search}
+Given $f$ and $N$, finds the smallest fraction $p/q \in [0, 1]$ such that $f(p/q)$ is true, and $p, q \le N$.
+\lstinputlisting[language=cpp]{code/fraction_binary_search.cpp}
+
+\subsection*{Fraction}
+\lstinputlisting[language=cpp]{code/fraction.cpp}
+
+\begin{multicols}{2}
+\subsection*{Polynomial Roots}
+Finds the real roots of a polynomial. Time complexity: $\mathcal{O}(n^2 \log(1/\epsilon))$.
+Usage (solves $x^2-3x+2 = 0$): \lstinline[language=cpp]|poly_roots({{ 2, -3, 1 }},-1e9,1e9)|
+\lstinputlisting[language=cpp]{code/poly_roots.cpp}
+\columnbreak
+\subsection*{Matrix Inverse}
+Invert matrix $A$. Returns rank; result is stored in $A$ unless singular (rank < n). Time complexity: $\mathcal{O}(n^3)$
+\lstinputlisting[language=cpp]{code/matrix_invert.cpp}
+\end{multicols}
+
+\newpage
+
 \subsection*{Simplex}
 Solves a general linear maximization problem: maximize $c^T x$ subject to $Ax \le b$, $x \ge 0$.
 
@@ -475,20 +519,9 @@ Numerical stability is not guaranteed. For better performance, define variables 
 
 \lstinputlisting[language=cpp]{code/simplex.cpp}
 
-\subsection*{Spherical Distance}
-\begin{multicols}{2}\lstinputlisting[language=cpp]{code/spherical_distance.cpp}
-  \columnbreak
-  Returns the shortest distance on the sphere with radius radius between the points
- with azimuthal angles (longitude) f1 ($\phi_1$) and f2 ($\phi_2$) from x axis and zenith angles
- (latitude) t1 ($\theta_1$) and t2 ($\theta_2$) from z axis (0 = north pole). All angles measured
- in radians. The algorithm starts by converting the spherical coordinates to cartesian coordinates
- so if that is what you have you can use only the two last rows. dx*radius is then the difference
- between the two points in the x direction and d*radius is the total distance between the points.
-
-\end{multicols}
 
 
-\vspace*{2cm}
+\vspace*{1cm}
 
 \section*{Strings}
 
