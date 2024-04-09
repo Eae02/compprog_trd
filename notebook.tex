@@ -63,10 +63,16 @@
 \lstinputlisting[language=cpp]{code/common.hpp}
 
 \subsection*{Compilation Script}
-\lstinputlisting[language=bash]{scripts/compile.sh}
+\begin{lstlisting}[language=bash]
+g++ --std=c++20 -Wall -Wshadow -Wno-conversion -Wfatal-errors -fsanitize=address,undefined -ftrapv -g $1 -o ${1%.cpp}.bin
+\end{lstlisting}
+
+\vspace*{-0.2cm}
 
 \subsection*{Binary Search}
 \lstinputlisting[language=cpp]{code/binary_search.cpp}
+
+\vspace*{-0.2cm}
 
 \subsection*{Ternary Search}
 Find the smallest i in $[a,b]$ that maximizes $f(i)$, assuming that $f(a) < \dots < f(i) \ge \dots \ge f(b)$.
@@ -78,6 +84,8 @@ If there is a range of $f(i) \dots f(j)$ that are equal, change according to the
   \columnbreak
   \lstinputlisting[language=python]{code/ternary_search.py}
 \end{multicols}
+
+\vspace*{-0.5cm}
 
 \section*{Geometry}
 
@@ -99,7 +107,7 @@ Returns the distance from the point p to the line segment starting at s and endi
   \lstinputlisting[language=python]{code/geometry_py/dist_ps.py}
 \end{multicols}
 
-\pagebreak
+\vspace*{-0.3cm}
 
 \subsection*{Distance between point and line}
 Returns the signed distance from the point p to the line passing through the points a and b.
@@ -117,6 +125,8 @@ Set \lstinline{refl=True} to get reflection of point p across the line instead.
   \columnbreak
   \lstinputlisting[language=python]{code/geometry_py/proj_pl.py}
 \end{multicols}
+
+\pagebreak
 
 \subsection*{Intersection between two lines}
 If a unique intersection point of the lines going through \lstinline{s1,e1} and \lstinline{s2,e2} exists \lstinline{(1,point)} is returned.\\
@@ -146,6 +156,15 @@ Returns twice the signed area of a polygon. Clockwise enumeration gives negative
   \lstinputlisting[language=python]{code/geometry_py/polygon_area.py}
 \end{multicols}
 
+\subsection*{Point inside polygon}
+Returns true if the point \lstinline{pt} lies within the polygon \lstinline{poly}.
+If strict is true, returns false for points on the boundary.
+\begin{multicols}{2}
+\lstinputlisting[language=python]{code/geometry_py/point_in_polygon.py}
+\columnbreak
+\lstinputlisting[language=cpp]{code/geometry_cpp/point_in_polygon.cpp}
+\end{multicols}
+
 \subsection*{Area of union of polygons}
 Calculates the area of the union of multiple polygons (not necessarily convex).
 The points within each polygon must be given in CCW order.
@@ -155,14 +174,6 @@ Time complexity: $\mathcal{O}(n^2)$, where $N$ is the total number of points.
 \subsection*{Angle struct}
 Struct for representing angles using integer points and sorting them.
 \lstinputlisting[language=cpp]{code/geometry_cpp/angle.cpp}
-
-\pagebreak
-
-\subsection*{Point inside polygon}
-Returns true if the point \lstinline{pt} lies within the polygon \lstinline{poly}.
-If strict is true, returns false for points on the boundary.
-\lstinputlisting[language=python]{code/geometry_py/point_in_polygon.py}
-\lstinputlisting[language=cpp]{code/geometry_cpp/point_in_polygon.cpp}
 
 \subsection*{Intersection between two circles}
 Computes the pair of points at which two circles intersect. Returns \lstinline{None} in case of no intersection.
@@ -217,6 +228,11 @@ Time complexity: $\mathcal{O}(n \log n)$
 
 \section*{Data Structures}
 
+\subsection*{Fenwick Tree}
+\lstinputlisting[language=cpp, aboveskip=0pt]{code/fenwick_tree.cpp}
+
+\pagebreak
+
 \subsection*{Segment Tree}
 \begin{multicols}{2}
   \lstinputlisting[language=cpp]{code/segtree.cpp}
@@ -224,11 +240,17 @@ Time complexity: $\mathcal{O}(n \log n)$
   \lstinputlisting[language=python]{code/segtree.py}
 \end{multicols}
 
-\subsection*{Fenwick Tree}
-\lstinputlisting[language=cpp, aboveskip=0pt]{code/fenwick_tree.cpp}
+\vspace*{-2.0cm}
 
 \subsection*{Sparse Table}
 \lstinputlisting[language=cpp, aboveskip=0pt]{code/sparse_table.cpp}
+
+\subsection*{Line Container}
+Container where you can add lines of the form $kx + m$, and query maximum values at points $x$.
+All operations are $\mathcal{O}(\log(n))$. For doubles, use \lstinline{inf = 1/.0} and \lstinline{div(a,b) = a/b}
+\begin{multicols}{2}
+\lstinputlisting[language=cpp]{code/line_container.cpp}
+\end{multicols}
 
 \subsection*{Lazy Segment Tree}
 Segment tree with support for range updates. Use T = pair of value and index to get index from queries.\\
@@ -239,13 +261,6 @@ All ranges are \lstinline{(lo, hi]} (hi is not included).
 
 \subsection*{Treap}
 \lstinputlisting[language=cpp]{code/treap.cpp}
-
-\subsection*{Line Container}
-Container where you can add lines of the form $kx + m$, and query maximum values at points $x$.
-All operations are $\mathcal{O}(\log(n))$. For doubles, use \lstinline{inf = 1/.0} and \lstinline{div(a,b) = a/b}
-\lstinputlisting[language=cpp]{code/line_container.cpp}
-
-\newpage
 
 \subsection*{Heavy-Light Decomposition}
 Constructs a heavy-light decomposition of a tree and generates indices for nodes that are consecutive within each heavy path.
